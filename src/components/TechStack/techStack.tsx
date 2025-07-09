@@ -19,8 +19,8 @@ const skillList= [
 
 function SkillCard({ icon, name }: { icon: React.ReactNode; name: string }) {
     return (
-        <CardSpotlight className="h-32 w-32 transition-all duration-300 hover:scale-105">
-        <div className="flex flex-col items-center justify-center h-full p-4  rounded-xl shadow-lg backdrop-blur-sm">
+        <CardSpotlight className="h-32 w-32 transition-all duration-300 hover:scale-105 border-3 border-white">
+        <div className="flex flex-col items-center justify-center h-full p-4  rounded-xl shadow-lg backdrop-blur-sm ">
             <div className="text-3xl mb-3 text-gray-700 dark:text-gray-200">{icon}</div>
             <h3 className="text-sm font-medium text-gray-800 dark:text-gray-100">{name}</h3>
         </div>
