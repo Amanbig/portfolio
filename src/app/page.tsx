@@ -1,5 +1,7 @@
 "use client"
 
+import { BackgroundGradientDemo } from "@/components/gradientCard/gradientCard";
+import { HeroSection } from "@/components/hero/heroSection";
 import { InterestCards } from "@/components/Interests/interestCard";
 import { MainNavbar } from "@/components/Navbar/Navbar";
 import { ProjectTestimonials } from "@/components/projectsShowCase/projectsCard";
@@ -12,6 +14,14 @@ export default function Home() {
     {/* <MainNavbar/> */}
     <div className="flex items-center flex-col justify-center px-2 md:px-10  py-4 w-full h-full">
       {/* <InterestCards/> */}
+      <div>
+        <HeroSection/>
+      </div>
+      <div>
+        <BackgroundGradientDemo>
+
+        </BackgroundGradientDemo>
+      </div>
       <div>
         <h2 className="dark:text-white text-black text-5xl">Tech Stack</h2>
       </div>
