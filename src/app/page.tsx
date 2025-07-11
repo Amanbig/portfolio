@@ -1,12 +1,14 @@
 "use client"
 
-import { BackgroundGradientDemo } from "@/components/gradientCard/gradientCard";
+import ContactForm from "@/components/contactForm/contactForm";
+import { AboutCard } from "@/components/AboutCard/aboutCard";
 import { HeroSection } from "@/components/hero/heroSection";
 import { InterestCards } from "@/components/Interests/interestCard";
 import { MainNavbar } from "@/components/Navbar/Navbar";
 import { ProjectTestimonials } from "@/components/projectsShowCase/projectsCard";
 import TechStack from "@/components/TechStack/techStack";
 import { Vortex } from "@/components/ui/vortex";
+import { EducationCard } from "@/components/educationCard/educationCard";
 
 export default function Home() {
   return (
@@ -18,15 +20,16 @@ export default function Home() {
       <div>
         <HeroSection/>
       </div>
-      {/* <div>
-        <BackgroundGradientDemo>
-
-        </BackgroundGradientDemo>
-      </div> */}
       <div>
         <h2 className="dark:text-white text-black text-5xl">Tech Stack</h2>
       </div>
     <TechStack/>
+    <div>
+      <div className="flex flex-col items-center justify-center mt-10 mb-5">
+        <h2 className="dark:text-white text-black text-5xl">Education Details</h2>
+      </div>
+      <EducationCard/>
+    </div>
     </div>
     {/* <Vortex
         backgroundColor="black"
@@ -42,6 +45,13 @@ export default function Home() {
       </div>
       <ProjectTestimonials/>
     </div>
+    <div>
+
+      <ContactForm/>
+    </div>
+    <div className="flex flex-col items-center justify-center mt-10 mb-5">
+        <AboutCard/>
+      </div>
       {/* </Vortex> */}
     </>
   );
