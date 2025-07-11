@@ -9,21 +9,28 @@ import { ProjectTestimonials } from "@/components/projectsShowCase/projectsCard"
 import TechStack from "@/components/TechStack/techStack";
 import { Vortex } from "@/components/ui/vortex";
 import { EducationCard } from "@/components/educationCard/educationCard";
+import { ExperienceCard } from "@/components/ExperienceCard/experienceCard";
 
 export default function Home() {
   return (
     <>
     {/* <MainNavbar/> */}
-    <div className="flex items-center flex-col justify-center px-2 md:px-10  py-4 w-full h-full">
+    <div>
       {/* <InterestCards/> */}
       <MainNavbar/>
       <div>
         <HeroSection/>
       </div>
-      <div>
+      <div className="flex flex-col items-center justify-center mt-10 mb-5">
         <h2 className="dark:text-white text-black text-5xl">Tech Stack</h2>
       </div>
     <TechStack/>
+    <div>
+      <div className="flex flex-col items-center justify-center mt-10 mb-5">
+        <h2 className="dark:text-white text-black text-5xl">Experience Details</h2>
+      </div>
+      <ExperienceCard/>
+    </div>
     <div>
       <div className="flex flex-col items-center justify-center mt-10 mb-5">
         <h2 className="dark:text-white text-black text-5xl">Education Details</h2>
