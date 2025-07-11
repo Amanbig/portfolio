@@ -14,26 +14,27 @@ export default function Home() {
     {/* <MainNavbar/> */}
     <div className="flex items-center flex-col justify-center px-2 md:px-10  py-4 w-full h-full">
       {/* <InterestCards/> */}
+      <MainNavbar/>
       <div>
         <HeroSection/>
       </div>
-      <div>
+      {/* <div>
         <BackgroundGradientDemo>
 
         </BackgroundGradientDemo>
-      </div>
+      </div> */}
       <div>
         <h2 className="dark:text-white text-black text-5xl">Tech Stack</h2>
       </div>
     <TechStack/>
     </div>
-    <Vortex
+    {/* <Vortex
         backgroundColor="black"
         rangeY={800}
         particleCount={500}
         baseHue={120}
         className="flex items-center flex-col justify-center px-2 md:px-10  py-4 w-full h-full"
-      >
+      > */}
 
     <div>
       <div className="flex flex-col items-center justify-center mt-10 mb-5">
@@ -41,7 +42,7 @@ export default function Home() {
       </div>
       <ProjectTestimonials/>
     </div>
-      </Vortex>
+      {/* </Vortex> */}
     </>
   );
 }
