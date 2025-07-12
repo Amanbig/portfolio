@@ -2,14 +2,18 @@
 
 import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
 import { motion, AnimatePresence } from "motion/react";
+import Link from "next/link";
 
 import { useEffect, useState } from "react";
+import { Button } from "./button";
+import { FaGithub } from "react-icons/fa";
 
 type Testimonial = {
   quote: string;
   name: string;
   designation: string;
   src: string;
+  github?: string;
 };
 export const AnimatedTestimonials = ({
   testimonials,
@@ -118,7 +122,7 @@ export const AnimatedTestimonials = ({
             <p className="text-sm text-gray-500 dark:text-neutral-500">
               {testimonials[active].designation}
             </p>
-            <motion.p className="mt-8 text-lg text-gray-500 dark:text-neutral-300">
+            <motion.p className="mt-2 text-lg text-gray-500 dark:text-neutral-300">
               {testimonials[active].quote.split(" ").map((word, index) => (
                 <motion.span
                   key={index}
@@ -143,7 +147,18 @@ export const AnimatedTestimonials = ({
                 </motion.span>
               ))}
             </motion.p>
+            {testimonials[active].github ? (
+              <Link href={testimonials[active].github} target="_blank" rel="noopener noreferrer" className="mt-6">
+                <FaGithub className="inline-block text-3xl" />
+              </Link>
+            ) : (
+              <Link href="#projects" className="mt-6">
+                <FaGithub className="inline-block text-3xl" />
+              </Link>
+            )}
+
           </motion.div>
+
           <div className="flex gap-4 pt-12 md:pt-0">
             <button
               onClick={handlePrev}

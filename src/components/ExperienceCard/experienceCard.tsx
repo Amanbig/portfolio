@@ -96,15 +96,6 @@ export function ExperienceCard() {
                       {active.description}
                     </motion.p>
                   </div>
-
-                  <motion.a
-                    layoutId={`button-${active.title}-${id}`}
-                    href={active.ctaLink}
-                    target="_blank"
-                    className="px-4 py-3 text-sm rounded-full font-bold bg-green-500 text-white"
-                  >
-                    {active.ctaText}
-                  </motion.a>
                 </div>
                 <div className="pt-4 relative px-4">
                   <motion.div
@@ -205,48 +196,37 @@ export const CloseIcon = () => {
 
 const cards = [
   {
-    description: "Lafleurtech",
-    title: "Software Engineer",
-    src: "https://assets.aceternity.com/demos/lana-del-rey.jpeg",
-    ctaText: "View",
-    ctaLink: "https://ui.aceternity.com/templates",
-    content: () => {
-      return (
-        <p>
-          Lana Del Rey, an iconic American singer-songwriter, is celebrated for
-          her melancholic and cinematic music style. Born Elizabeth Woolridge
-          Grant in New York City, she has captivated audiences worldwide with
-          her haunting voice and introspective lyrics. <br /> <br /> Her songs
-          often explore themes of tragic romance, glamour, and melancholia,
-          drawing inspiration from both contemporary and vintage pop culture.
-          With a career that has seen numerous critically acclaimed albums, Lana
-          Del Rey has established herself as a unique and influential figure in
-          the music industry, earning a dedicated fan base and numerous
-          accolades.
-        </p>
-      );
-    },
+  description: "Lafleurtech",
+  title: "Software Engineer",
+  src: "https://assets.aceternity.com/demos/lana-del-rey.jpeg", // Replace with your actual image if needed
+  ctaText: "View",
+  content: () => {
+    return (
+      <p>
+        <strong>Mar 2025 - Present</strong> <br />
+        Developed and deployed RAG-based intelligent systems for government organizations including
+        JAC Chandigarh and NDMC Delhi. <br /><br />
+        Built a self-service data integration platform allowing clients to seamlessly incorporate
+        custom datasets into RAG systems.
+      </p>
+    );
   },
-  {
-    description: "Celebrare",
-    title: "Flutter Developer",
-    src: "https://assets.aceternity.com/demos/babbu-maan.jpeg",
-    ctaText: "View",
-    ctaLink: "https://ui.aceternity.com/templates",
-    content: () => {
-      return (
-        <p>
-          Babu Maan, a legendary Punjabi singer, is renowned for his soulful
-          voice and profound lyrics that resonate deeply with his audience. Born
-          in the village of Khant Maanpur in Punjab, India, he has become a
-          cultural icon in the Punjabi music industry. <br /> <br /> His songs
-          often reflect the struggles and triumphs of everyday life, capturing
-          the essence of Punjabi culture and traditions. With a career spanning
-          over two decades, Babu Maan has released numerous hit albums and
-          singles that have garnered him a massive fan following both in India
-          and abroad.
-        </p>
-      );
-    },
+},
+{
+  description: "Celebrare",
+  title: "Flutter Developer",
+  src: "https://assets.aceternity.com/demos/babbu-maan.jpeg", // Replace with your actual image if needed
+  ctaText: "View",
+  content: () => {
+    return (
+      <p>
+        <strong>Dec 2024 - Mar 2025</strong> <br />
+        Collaborated with various teams to develop the iOS app for Celebrare, their main
+        application, as well as WowInvite, their newest offering. <br /><br />
+        Participated in iterative testing, bug fixes, and UX enhancement with design & QA teams.
+      </p>
+    );
   },
+},
+
 ];
