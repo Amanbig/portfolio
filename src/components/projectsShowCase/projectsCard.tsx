@@ -23,7 +23,7 @@ export function ProjectTestimonials() {
         "A comprehensive machine learning-powered web application that provides intelligent crop recommendations based on soil and environmental parameters.",
       name: "Crop-recommendation-system",
       designation: "Nextjs, Python, AI/ML, FastAPI, ShadcnUI, xgboost, pandas, numpy",
-      github:"",
+      github:"https://github.com/Amanbig/crop-recommendation-system",
       src: "https://images.unsplash.com/photo-1623582854588-d60de57fa33f?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     {
