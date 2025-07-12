@@ -1,10 +1,12 @@
 "use client";
 import React from "react";
 import { BackgroundGradient } from "../ui/background-gradient";
+import { CardContainer } from "../ui/3d-card";
 
 export function AboutCard() {
   return (
     <div>
+      <CardContainer>
       <BackgroundGradient className="rounded-[22px] max-w-4xl p-4 sm:p-10 bg-white dark:bg-zinc-900">
         <div className="flex flex-col sm:flex-row gap-6">
           {/* About Text */}
@@ -28,6 +30,7 @@ export function AboutCard() {
           </div>
         </div>
       </BackgroundGradient>
+      </CardContainer>
     </div>
   );
 }

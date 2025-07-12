@@ -2,12 +2,13 @@
 
 import ContactForm from "@/components/contactForm/contactForm";
 import { AboutCard } from "@/components/AboutCard/aboutCard";
-import { HeroSection } from "@/components/hero/heroSection";
+import { HeroSection } from "@/components/heroSection/heroSection";
 import { MainNavbar } from "@/components/Navbar/Navbar";
 import { ProjectTestimonials } from "@/components/projectsShowCase/projectsCard";
 import TechStack from "@/components/TechStack/techStack";
 import { EducationCard } from "@/components/educationCard/educationCard";
 import { ExperienceCard } from "@/components/ExperienceCard/experienceCard";
+import { Toaster } from "@/components/ui/sonner";
 
 export default function Home() {
   return (
@@ -184,6 +185,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <Toaster />
     </main>
   );
 }

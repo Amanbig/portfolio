@@ -198,7 +198,7 @@ const cards = [
   {
   description: "Lafleurtech",
   title: "Software Engineer",
-  src: "https://assets.aceternity.com/demos/lana-del-rey.jpeg", // Replace with your actual image if needed
+  src: "https://static.vecteezy.com/system/resources/previews/026/564/515/original/programming-code-coding-or-hacker-sign-programming-code-icon-made-with-binary-code-in-wireframe-hands-digital-binary-data-and-digital-code-matrix-background-with-digits-1-0-illustration-vector.jpg", // Replace with your actual image if needed
   ctaText: "View",
   content: () => {
     return (
@@ -215,7 +215,7 @@ const cards = [
 {
   description: "Celebrare",
   title: "Flutter Developer",
-  src: "https://assets.aceternity.com/demos/babbu-maan.jpeg", // Replace with your actual image if needed
+  src: "https://www.daily.co/blog/content/images/2023/07/Flutter-feature.png", // Replace with your actual image if needed
   ctaText: "View",
   content: () => {
     return (
