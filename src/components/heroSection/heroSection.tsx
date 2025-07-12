@@ -3,8 +3,6 @@ import Image from "next/image";
 import { TypewriterEffectSmooth } from "../ui/typewriter-effect";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { FiDownload } from 'react-icons/fi';
-
 export function HeroSection() {
 
   const [pdfUrl, setPdfUrl] = useState("");
@@ -12,7 +10,7 @@ export function HeroSection() {
   useEffect(() => {
     const fetchPdf = async () => {
       try {
-        const response = await fetch('/resume/Amanpreet_singh.pdf');
+        const response = await fetch('/resume/Resume_Data_Science.pdf');
         if (!response.ok) throw new Error('Network response was not ok');
         const blob = await response.blob();
         const url = window.URL.createObjectURL(blob);
@@ -60,16 +58,11 @@ export function HeroSection() {
           Github
         </button>
           </Link>
-        <button className="w-40 h-10 rounded-xl bg-white text-black border border-black  text-sm">
-          {pdfUrl ? (
-                  <a href={pdfUrl} download="Amanpreet_singh.pdf" className="flex items-center gap-2">
-                    <span>Download CV</span>
-                    <FiDownload className="text-xl" />
-                  </a>
-                ) : (
-                  <span>Loading...</span>
-                )}
+          <a href={pdfUrl!} download="Amanpreet_singh.pdf" target="_blank" rel="noopener noreferrer">
+        <button className="w-40 h-10 rounded-xl bg-white text-black border border-black  text-sm cursor-pointer">
+          Resume
         </button>
+          </a>
       </div>
     </div>
   );
