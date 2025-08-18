@@ -84,7 +84,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-200 to-purple-200"
+            className="bg-clip-text text-white bg-gradient-to-r from-white via-blue-200 to-purple-200"
           >
             <BlurText
               text="Hi, I'm Aman"
@@ -157,42 +157,14 @@ export default function Hero() {
           </motion.a>
         </motion.div>
 
-        {/* Quick Stats */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.0 }}
-          className="flex flex-wrap justify-center gap-8 text-center"
-        >
-          {[
-            { number: "50+", label: "Projects" },
-            { number: "3+", label: "Years Exp" },
-            { number: "25+", label: "Happy Clients" },
-            { number: "15+", label: "Technologies" }
-          ].map((stat, index) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 1.2 + (index * 0.1) }}
-              className="group"
-            >
-              <div className="text-2xl md:text-3xl font-bold text-white group-hover:text-blue-400 transition-colors duration-300">
-                {stat.number}
-              </div>
-              <div className="text-sm text-slate-400 group-hover:text-slate-300 transition-colors duration-300">
-                {stat.label}
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+        
 
         {/* Scroll Indicator */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 1.4 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          className="absolute bottom-2 left-1/2 transform -translate-x-1/2"
         >
           <motion.div
             animate={{ y: [0, 10, 0] }}

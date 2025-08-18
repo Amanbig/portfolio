@@ -10,29 +10,53 @@ interface Skill {
 }
 
 const skills: Skill[] = [
+  // Frontend
   { name: "React", level: 95, category: "Frontend", icon: "⚛️" },
   { name: "Next.js", level: 90, category: "Frontend", icon: "▲" },
   { name: "TypeScript", level: 88, category: "Language", icon: "📘" },
+  { name: "Tailwind CSS", level: 85, category: "Frontend", icon: "🎨" },
+  { name: "ShadCN UI", level: 80, category: "Frontend", icon: "🖌️" },
+
+  // Backend
   { name: "Node.js", level: 85, category: "Backend", icon: "🟢" },
-  { name: "Python", level: 82, category: "Language", icon: "🐍" },
-  { name: "AWS", level: 78, category: "Cloud", icon: "☁️" },
+  { name: "NestJS", level: 80, category: "Backend", icon: "🔗" },
+  { name: "FastAPI", level: 82, category: "Backend", icon: "⚡" },
+
+  // Databases & Infra
+  { name: "MongoDB", level: 83, category: "Database", icon: "🍃" },
+  { name: "Qdrant", level: 78, category: "Database", icon: "🧭" },
+  { name: "PostgreSQL", level: 72, category: "Database", icon: "🐘" },
+
+  // DevOps & Cloud
   { name: "Docker", level: 75, category: "DevOps", icon: "🐳" },
-  { name: "GraphQL", level: 80, category: "Backend", icon: "🔗" },
+  { name: "Nginx", level: 70, category: "DevOps", icon: "🚦" },
+  { name: "AWS", level: 70, category: "Cloud", icon: "☁️" },
+
+  // AI / ML
+  { name: "LangChain", level: 78, category: "AI/ML", icon: "🔗" },
+  { name: "Machine Learning", level: 72, category: "AI/ML", icon: "🤖" },
+  { name: "TensorFlow", level: 65, category: "AI/ML", icon: "📊" },
+
+  // Languages
+  { name: "Python", level: 82, category: "Language", icon: "🐍" },
+  { name: "Rust", level: 75, category: "Language", icon: "🦀" },
+  { name: "JavaScript", level: 90, category: "Language", icon: "✨" },
 ];
 
-const categories = ["All", "Frontend", "Backend", "Language", "Cloud", "DevOps"];
+
+const categories = ["All", "Frontend", "Backend", "Language", "Database", "AI/ML", "DevOps", "Cloud"];
 
 export default function Skills() {
   const [activeCategory, setActiveCategory] = useState("All");
 
-  const filteredSkills = activeCategory === "All" 
-    ? skills 
+  const filteredSkills = activeCategory === "All"
+    ? skills
     : skills.filter(skill => skill.category === activeCategory);
 
   return (
     <section id="skills" className="py-20 max-w-6xl mx-auto w-full">
       <div className="text-center mb-16">
-        <motion.h2 
+        <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -40,7 +64,7 @@ export default function Skills() {
         >
           Skills & Expertise
         </motion.h2>
-        <motion.p 
+        <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
@@ -51,7 +75,7 @@ export default function Skills() {
       </div>
 
       {/* Category Filter */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
@@ -61,11 +85,10 @@ export default function Skills() {
           <button
             key={category}
             onClick={() => setActiveCategory(category)}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-              activeCategory === category
+            className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeCategory === category
                 ? "bg-white/10 text-white border border-white/20"
                 : "text-slate-400 hover:text-white hover:bg-white/5"
-            }`}
+              }`}
           >
             {category}
           </button>
@@ -73,7 +96,7 @@ export default function Skills() {
       </motion.div>
 
       {/* Skills Grid */}
-      <motion.div 
+      <motion.div
         layout
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
       >
@@ -94,7 +117,7 @@ export default function Skills() {
                 <p className="text-sm text-slate-400">{skill.category}</p>
               </div>
             </div>
-            
+
             <div className="space-y-2">
               <div className="flex justify-between text-sm">
                 <span className="text-slate-400">Proficiency</span>

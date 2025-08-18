@@ -11,8 +11,8 @@ interface Stat {
 
 const stats: Stat[] = [
   { label: "Projects Completed", value: 50, suffix: "+", icon: "🚀" },
-  { label: "Happy Clients", value: 25, suffix: "+", icon: "😊" },
-  { label: "Years Experience", value: 3, suffix: "+", icon: "⏳" },
+  { label: "Lines of code", value: 75000, suffix: "+", icon: "😊" },
+  { label: "Years Experience", value: 1, suffix: "+", icon: "⏳" },
   { label: "Technologies", value: 15, suffix: "+", icon: "⚡" },
 ];
 

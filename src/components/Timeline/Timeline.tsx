@@ -3,21 +3,21 @@ import { motion } from "motion/react";
 
 const events = [
   { 
-    year: "2024", 
-    title: "Senior Frontend Engineer at Acme", 
-    desc: "Led frontend efforts for the main product, mentored junior developers, and implemented modern React patterns.",
+    year: "2025", 
+    title: "Software DevelopmentIntern at Lafleurtech", 
+    desc: "Built a self-service data integration platform allowing clients to seamlessly incorporate custom datasets into RAG systems.",
     icon: "💼"
   },
   { 
-    year: "2022", 
-    title: "Joined Startup XYZ", 
-    desc: "Built internal design system and improved performance by 40%. Developed key features using React and TypeScript.",
+    year: "2025", 
+    title: "Flutter Developer Intern at Celebrare", 
+    desc: "Collaborated with various teams to develop the iOS app for Celebrare, which is their main application, as well as WowInvite, their newest offering.",
     icon: "🚀"
   },
   { 
-    year: "2020", 
+    year: "2021-2025", 
     title: "Graduated Computer Science", 
-    desc: "Bachelor's degree in Computer Science from University. Specialized in web development and software engineering.",
+    desc: "Bachelor's degree in Computer Science and Engineering from Chandigarh College of Engineering and Technology. Specialized in web development and software engineering.",
     icon: "🎓"
   },
 ];

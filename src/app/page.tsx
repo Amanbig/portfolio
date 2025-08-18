@@ -10,12 +10,9 @@ import Services from "@/components/Services/Services";
 import Stats from "@/components/Stats/Stats";
 import Skills from "@/components/Skills/Skills";
 import Process from "@/components/Process/Process";
-import TechStack from "@/components/TechStack/TechStack";
 import Timeline from "@/components/Timeline/Timeline";
 import ProjectShowcase from "@/components/ProjectShowcase/ProjectShowcase";
 import FeaturedWork from "@/components/FeaturedWork/FeaturedWork";
-import Testimonials from "@/components/Testimonials/Testimonials";
-import BlogPreview from "@/components/BlogPreview/BlogPreview";
 import CTA from "@/components/CTA/CTA";
 import Contact from "@/components/Contact/Contact";
 import Footer from "@/components/Footer/Footer";
@@ -26,7 +23,7 @@ export default function Home() {
       {/* Progress & Navigation */}
       <ScrollProgress />
       <BackToTop />
-      
+
       {/* Background Elements */}
       <div className="absolute inset-0 w-full h-full">
         <Squares
@@ -62,8 +59,6 @@ export default function Home() {
         {/* Process Section */}
         <Process />
 
-        {/* Tech Stack Section */}
-        <TechStack />
 
         {/* Timeline Section */}
         <Timeline />
@@ -73,12 +68,6 @@ export default function Home() {
 
         {/* Featured Work Section */}
         <FeaturedWork />
-
-        {/* Blog Preview Section */}
-        <BlogPreview />
-
-        {/* Testimonials Section */}
-        <Testimonials />
 
         {/* Call to Action Section */}
         <CTA />
