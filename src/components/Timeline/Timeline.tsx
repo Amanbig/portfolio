@@ -16,7 +16,7 @@ const events = [
   },
   { 
     year: "2021-2025", 
-    title: "Graduated Computer Science", 
+    title: "Graduated Computer Science and Engineering", 
     desc: "Bachelor's degree in Computer Science and Engineering from Chandigarh College of Engineering and Technology. Specialized in web development and software engineering.",
     icon: "🎓"
   },
