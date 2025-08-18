@@ -100,7 +100,7 @@ export default function Contact() {
       } else {
         setSubmitStatus('error');
       }
-    } catch (error) {
+    } catch {
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
@@ -124,11 +124,11 @@ export default function Contact() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-slate-400 max-w-2xl mx-auto"
         >
-          Have a project in mind or want to collaborate? I'd love to hear from you.
+          Have a project in mind or want to collaborate? I&apos;d love to hear from you.
         </motion.p>
       </div>
 
-      <div className="grid lg:grid-cols-2 gap-12">
+      <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
         {/* Contact Form */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
@@ -138,7 +138,7 @@ export default function Contact() {
         >
           <form
             onSubmit={handleSubmit}
-            className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 space-y-6"
+            className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 sm:p-8 space-y-6"
           >
             <div>
               <h3 className="text-2xl font-semibold text-white mb-2">Let's work together</h3>
@@ -148,7 +148,7 @@ export default function Contact() {
             {/* Status Messages */}
             {submitStatus === 'success' && (
               <div className="p-4 bg-green-500/20 border border-green-500/30 rounded-lg text-green-300">
-                Your message has been sent successfully! I'll get back to you soon.
+                Your message has been sent successfully! I&apos;ll get back to you soon.
               </div>
             )}
             {submitStatus === 'error' && (

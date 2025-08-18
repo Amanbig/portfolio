@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import { motion } from "motion/react";
-import Image from "next/image";
 
 interface Project {
   id: string;
@@ -127,13 +126,13 @@ export default function ProjectShowcase() {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="flex flex-wrap justify-center gap-3 mb-12"
+        className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-12 px-4"
       >
         {categories.map((category) => (
           <button
             key={category}
             onClick={() => setActiveCategory(category)}
-            className={`px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 ${
+            className={`px-3 sm:px-6 py-2 sm:py-3 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 whitespace-nowrap ${
               activeCategory === category
                 ? "bg-white/10 text-white border border-white/20 shadow-lg"
                 : "text-slate-400 hover:text-white hover:bg-white/5 border border-transparent"

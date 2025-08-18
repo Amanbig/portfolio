@@ -25,19 +25,17 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-30 transition-all duration-300 ${
-      scrolled ? "py-2" : "py-4"
-    }`}>
-      <div className={`absolute inset-0 transition-all duration-300 ${
-        scrolled 
-          ? "bg-black/90 backdrop-blur-lg border-b border-white/10" 
+    <nav className={`fixed top-0 left-0 right-0 z-30 transition-all duration-300 ${scrolled ? "py-2" : "py-4"
+      }`}>
+      <div className={`absolute inset-0 transition-all duration-300 ${scrolled
+          ? "bg-black/90 backdrop-blur-lg border-b border-white/10"
           : "bg-gradient-to-b from-black/80 via-black/50 to-transparent backdrop-blur-md"
-      }`} />
-      
+        }`} />
+
       <div className="relative z-10 max-w-6xl mx-auto px-6">
         <div className="flex items-center justify-between">
-          <Link 
-            href="#" 
+          <Link
+            href="#"
             className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white/80 hover:to-sky-400 transition-all duration-300"
           >
             <BlurText text="Amanbig" animateBy="letters" delay={30} direction="top" />
@@ -61,17 +59,15 @@ export default function Navbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden relative w-6 h-6 flex flex-col justify-center items-center"
+            className="md:hidden relative w-8 h-8 flex flex-col justify-center items-center bg-white/10 rounded-lg hover:bg-white/20 transition-all duration-300"
+            aria-label="Toggle mobile menu"
           >
-            <span className={`w-6 h-0.5 bg-white transition-all duration-300 ${
-              isOpen ? "rotate-45 translate-y-0" : "-translate-y-1"
-            }`} />
-            <span className={`w-6 h-0.5 bg-white transition-all duration-300 ${
-              isOpen ? "opacity-0" : "opacity-100"
-            }`} />
-            <span className={`w-6 h-0.5 bg-white transition-all duration-300 ${
-              isOpen ? "-rotate-45 translate-y-0" : "translate-y-1"
-            }`} />
+            <span className={`w-5 h-0.5 bg-white transition-all duration-300 ${isOpen ? "rotate-45 translate-y-0" : "-translate-y-1.5"
+              }`} />
+            <span className={`w-5 h-0.5 bg-white transition-all duration-300 ${isOpen ? "opacity-0" : "opacity-100"
+              }`} />
+            <span className={`w-5 h-0.5 bg-white transition-all duration-300 ${isOpen ? "-rotate-45 translate-y-0" : "translate-y-1.5"
+              }`} />
           </button>
         </div>
 

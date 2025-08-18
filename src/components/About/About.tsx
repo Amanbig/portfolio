@@ -48,7 +48,7 @@ export default function About() {
         </motion.h2>
       </div>
 
-      <div className="grid lg:grid-cols-2 gap-16 items-center">
+      <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
         {/* Main Content */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
@@ -58,7 +58,7 @@ export default function About() {
         >
           <div className="space-y-6 text-lg text-slate-300 leading-relaxed">
             <p className="text-xl text-white font-medium">
-              Hi there! I'm Aman, a passionate software developer with over years of experience 
+              Hi there! I&apos;m Aman, a passionate software developer with over 3 years of experience 
               crafting digital solutions that make a difference.
             </p>
             
@@ -71,21 +71,21 @@ export default function About() {
             </p>
 
             <p>
-              Beyond web development, I'm passionate about mobile app development, game creation, 
+              Beyond web development, I&apos;m passionate about mobile app development, game creation, 
               and exploring the possibilities of AI and machine learning. I believe in continuous 
               learning and staying up-to-date with the latest industry trends and best practices.
             </p>
 
             <p>
-              When I'm not coding, you'll find me contributing to open-source projects, writing 
-              technical articles, or experimenting with new technologies. I'm always excited to 
-              collaborate on innovative projects that push the boundaries of what's possible.
+              When I&apos;m not coding, you&apos;ll find me contributing to open-source projects, writing 
+              technical articles, or experimenting with new technologies. I&apos;m always excited to 
+              collaborate on innovative projects that push the boundaries of what&apos;s possible.
             </p>
           </div>
 
           {/* Interests */}
           <div className="pt-6">
-            <h3 className="text-xl font-semibold text-white mb-4">What I'm passionate about:</h3>
+            <h3 className="text-xl font-semibold text-white mb-4">What I&apos;m passionate about:</h3>
             <div className="flex flex-wrap gap-3">
               {interests.map((interest, index) => (
                 <motion.span

@@ -6,7 +6,7 @@ import Squares from "@/components/Backgrounds/Squares/Squares";
 
 const roles = [
   "Full Stack Developer",
-  "React Specialist", 
+  "React Specialist",
   "Mobile App Developer",
   "Game Developer",
   "AI/ML Engineer"
@@ -79,7 +79,7 @@ export default function Hero() {
         </motion.div>
 
         {/* Main Heading */}
-        <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold leading-tight mb-8">
+        <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold leading-tight mb-6 sm:mb-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -94,7 +94,7 @@ export default function Hero() {
               className="block mb-4"
             />
           </motion.div>
-          
+
           {/* Animated Role */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -121,8 +121,8 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="text-lg md:text-xl text-slate-300 max-w-3xl leading-relaxed mb-12"
         >
-          I craft exceptional digital experiences using modern technologies like React, Next.js, and TypeScript. 
-          From web applications to mobile apps, games, and AI-powered solutions — I bring ideas to life with 
+          I craft exceptional digital experiences using modern technologies like React, Next.js, and TypeScript.
+          From web applications to mobile apps, games, and AI-powered solutions — I bring ideas to life with
           clean code and beautiful design.
         </motion.p>
 
@@ -131,17 +131,17 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="flex flex-col sm:flex-row gap-6 mb-16"
+          className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 mb-12 sm:mb-16"
         >
           <motion.a
             href="#projects"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="group relative px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 rounded-xl font-semibold text-white shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
+            className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 rounded-xl font-semibold text-white shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden text-center"
           >
-            <span className="relative z-10 flex items-center gap-2">
+            <span className="relative z-10 flex items-center justify-center gap-2">
               View My Work
-              <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </span>
@@ -151,13 +151,11 @@ export default function Hero() {
             href="#contact"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="px-8 py-4 border border-white/20 hover:bg-white/10 rounded-xl font-semibold text-white transition-all duration-300 backdrop-blur-sm"
+            className="px-6 sm:px-8 py-3 sm:py-4 border border-white/20 hover:bg-white/10 rounded-xl font-semibold text-white transition-all duration-300 backdrop-blur-sm text-center"
           >
             Get In Touch
           </motion.a>
         </motion.div>
-
-        
 
         {/* Scroll Indicator */}
         <motion.div
