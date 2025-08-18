@@ -13,7 +13,6 @@ import Process from "@/components/Process/Process";
 import Timeline from "@/components/Timeline/Timeline";
 import ProjectShowcase from "@/components/ProjectShowcase/ProjectShowcase";
 import FeaturedWork from "@/components/FeaturedWork/FeaturedWork";
-import CTA from "@/components/CTA/CTA";
 import Contact from "@/components/Contact/Contact";
 import Footer from "@/components/Footer/Footer";
 
@@ -68,9 +67,6 @@ export default function Home() {
 
         {/* Featured Work Section */}
         <FeaturedWork />
-
-        {/* Call to Action Section */}
-        <CTA />
 
         {/* Contact Section */}
         <Contact />
