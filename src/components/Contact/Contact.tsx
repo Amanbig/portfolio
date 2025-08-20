@@ -17,27 +17,6 @@ interface FormErrors {
   message?: string;
 }
 
-const contactInfo = [
-  {
-    icon: "📞",
-    title: 'Github',
-    description: 'Amanbig',
-    href: 'https://github.com/Amanbig'
-  },
-  {
-    icon: "✉️",
-    title: 'Email',
-    description: 'amanpreetsinghjhiwant7@gmail.com',
-    href: 'mailto:amanpreetsinghjhiwant7@gmail.com'
-  },
-  {
-    icon: "📍",
-    title: 'Address',
-    description: 'Punjab, India 140301',
-    href: 'https://maps.google.com/?q=Punjab,India,140301'
-  },
-];
-
 export default function Contact() {
   const [formData, setFormData] = useState<FormData>({
     firstname: '',
@@ -143,7 +122,7 @@ export default function Contact() {
           className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 sm:p-8 space-y-6"
         >
           <div>
-            <h3 className="text-2xl font-semibold text-white mb-2">Let's work together</h3>
+            <h3 className="text-2xl font-semibold text-white mb-2">Let&apos;s work together</h3>
             <p className="text-slate-400 mb-6">Fill in the form below to start a conversation</p>
           </div>
 
