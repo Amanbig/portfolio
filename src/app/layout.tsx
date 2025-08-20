@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://your-domain.com",
+    // url: "https://your-domain.com",
     title: "Aman - Full Stack Developer",
     description: "Full-stack developer specializing in modern web and mobile applications",
     siteName: "Aman Portfolio",
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Aman - Full Stack Developer",
     description: "Full-stack developer specializing in modern web and mobile applications",
-    creator: "@yourusername",
+    creator: "@Amanpre27838795",
   },
 };
 
