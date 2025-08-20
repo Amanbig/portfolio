@@ -1,28 +1,32 @@
 "use client";
 import { motion } from "motion/react";
+import Image from "next/image";
 
 type Project = {
   title: string;
   description: string;
   image: string;
   link: string;
+  code: string;
   tags: string[];
 };
 
 const projects: Project[] = [
   {
-    title: "E-commerce Platform",
-    description: "A modern e-commerce platform built with Next.js, featuring dynamic routing, cart functionality, and Stripe integration. Includes user authentication, payment processing, and admin dashboard.",
-    image: "/projects/ecommerce-full.jpg",
-    link: "#",
-    tags: ["Next.js", "TypeScript", "Stripe", "Tailwind"],
+    title: "FileShare",
+    description: "A modern, secure file sharing platform built with Next.js, NestJS, and Appwrite. Share files with expirable links, track downloads, and manage your uploads with a beautiful, responsive interface.",
+    image: "/projects/fileshare.png",
+    link: "https://file-share-three-mu.vercel.app/",
+    code:"https://github.com/Amanbig/FileShare",
+    tags: ["Next.js", "TypeScript", "Appwrite", "TailwindCSS","Nestjs"],
   },
   {
-    title: "Real-time Chat App",
-    description: "A full-featured chat application with real-time messaging, file sharing, emoji reactions, and group chat functionality built with modern web technologies.",
-    image: "/projects/chat-app.jpg",
-    link: "#",
-    tags: ["React", "Socket.io", "Node.js", "MongoDB"],
+    title: "Music Level",
+    description: "An AI-powered music generation platform that allows users to create unique musical compositions using artificial intelligence. Built with a modern tech stack featuring NestJS backend and Next.js frontend.",
+    image: "/projects/music-level.png",
+    link: "https://music-level.vercel.app/",
+    code:"https://github.com/Amanbig/music_level",
+    tags: ["Next.js", "TypeScript", "Appwrite", "TailwindCSS","Nestjs", "Gemini API"],
   },
 ];
 
@@ -62,8 +66,8 @@ export default function FeaturedWork() {
               <div className="relative h-[400px] group overflow-hidden rounded-2xl bg-gradient-to-br from-blue-500/20 to-purple-600/20">
                 {/* Placeholder for project image */}
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-8xl opacity-30">
-                    {index === 0 ? "🛒" : "💬"}
+                  <div className="text-8xl">
+                    <Image src={project.image} alt={project.title} layout="fill" objectFit="cover" />
                   </div>
                 </div>
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-500" />
@@ -124,7 +128,7 @@ export default function FeaturedWork() {
                 </motion.a>
                 
                 <motion.a
-                  href="#"
+                  href={project.code}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="inline-flex items-center gap-2 px-6 py-3 border border-white/20 hover:bg-white/10 rounded-xl font-semibold text-white transition-all duration-300"

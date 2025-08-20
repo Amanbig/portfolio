@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { motion } from "motion/react";
+import Image from "next/image";
 
 interface Project {
   id: string;
@@ -18,74 +19,74 @@ interface Project {
 const projects: Project[] = [
   {
     id: "1",
-    title: "E-Commerce Platform",
-    description: "Modern e-commerce solution with advanced features",
-    longDescription: "A full-stack e-commerce platform built with Next.js, featuring user authentication, payment processing, inventory management, and admin dashboard.",
+    title: "Backtool",
+    description: "A CLI tool to generate backend structures for Node.js applications with support for multiple databases and a visually appealing user interface.",
+    longDescription: "BackTool simplifies the process of setting up a Node.js backend by generating a complete project structure, including a server entry point, models, database configuration, controllers, routes, middleware, and a customized package.json. It supports MongoDB, PostgreSQL, MySQL, and SQLite, allowing developers to quickly scaffold a backend tailored to their preferred database.",
     category: "Web Development",
-    tags: ["Next.js", "TypeScript", "Stripe", "Prisma"],
-    image: "/projects/ecommerce.jpg",
-    liveUrl: "#",
-    githubUrl: "#",
+    tags: ["chalk", "Inquirer", "Figlet", "commander"],
+    image: "/projects/backtool.png",
+    liveUrl: "https://www.npmjs.com/package/backtool",
+    githubUrl: "https://github.com/Amanbig/backTool",
     featured: true
   },
   {
     id: "2", 
-    title: "Chat Application",
-    description: "Real-time messaging app with modern UI",
-    longDescription: "Real-time chat application with WebSocket integration, file sharing, emoji reactions, and group chat functionality.",
-    category: "Web Development",
-    tags: ["React", "Socket.io", "Node.js", "MongoDB"],
-    image: "/projects/chat.jpg",
-    liveUrl: "#",
-    githubUrl: "#",
-    featured: true
+    title: "Persona AI",
+    description: "A full-stack web application that predicts personality type (introvert, extrovert, or ambivert) using AI/ML models.",
+    longDescription: "A full-stack web application that predicts personality type (introvert, extrovert, or ambivert) using AI/ML models. Built with Next.js (frontend) and Python FastAPI (backend).",
+    category: "AI & ML",
+    tags: ["Nextjs", "Typescript", "numpy", "scikit-learn", "Fastapi", "pandas"],
+    image: "/projects/Persona-AI.png",
+    liveUrl: "https://introver-extrovert.vercel.app/",
+    githubUrl: "https://github.com/Amanbig/Introver-Extrovert",
+    featured: false
   },
   {
     id: "3",
-    title: "Mobile Fitness App",
-    description: "Cross-platform fitness tracking application",
-    longDescription: "A comprehensive fitness tracking app with workout plans, progress tracking, social features, and integration with wearable devices.",
-    category: "Mobile Development",
-    tags: ["React Native", "Firebase", "Redux", "Health Kit"],
-    image: "/projects/fitness.jpg",
-    liveUrl: "#",
-    githubUrl: "#",
+    title: "Satellite AI",
+    description: "A modern web application that uses AI to classify different types of areas from satellite images.",
+    longDescription: "A modern web application that uses AI to classify different types of areas from satellite images. The application can identify various terrains like deserts, plains, and other landscapes from satellite imagery.",
+    category: "AI & ML",
+    tags: ["Nextjs", "Tensorflow", "Numpy", "CNN","Fastapi", "Pandas"],
+    image: "/projects/satellite-ai.png",
+    liveUrl: "https://satellite-ai-three.vercel.app/",
+    githubUrl: "https://github.com/Amanbig/Satellite-AI",
     featured: false
   },
   {
     id: "4",
-    title: "2D Platformer Game",
-    description: "Indie game with pixel art and smooth gameplay",
-    longDescription: "A 2D platformer game featuring custom physics, level editor, achievements system, and cross-platform multiplayer.",
-    category: "Game Development",
-    tags: ["Unity", "C#", "Pixel Art", "Steam"],
-    image: "/projects/game.jpg",
-    liveUrl: "#",
-    githubUrl: "#",
-    featured: false
+    title: "TomatoGuard AI",
+    description: "TomatoGuard AI is a comprehensive web application that uses Convolutional Neural Networks (CNN) to detect diseases in tomato plants.",
+    longDescription: "TomatoGuard AI is a comprehensive web application that uses Convolutional Neural Networks (CNN) to detect diseases in tomato plants. The system provides real-time analysis, detailed disease information, and research insights.",
+    category: "AI & ML",
+    tags: ["Nextjs", "Tensorflow", "Numpy", "CNN","Fastapi", "Pandas"],
+    image: "/projects/tomato-guard-ai.png",
+    liveUrl: "https://cnn-based-tomato-disease-prediction.vercel.app/",
+    githubUrl: "https://github.com/Amanbig/CNN-based-Tomato-disease-prediction",
+    featured: true
   },
   {
     id: "5",
-    title: "AI Content Generator",
-    description: "ML-powered content creation tool",
-    longDescription: "An AI-powered tool that generates high-quality content using natural language processing and machine learning algorithms.",
+    title: "Crop Recommendation System",
+    description: "A comprehensive machine learning-powered web application that provides intelligent crop recommendations based on soil and environmental parameters.",
+    longDescription: "A comprehensive machine learning-powered web application that provides intelligent crop recommendations based on soil and environmental parameters.The system helps farmers and agricultural professionals make informed decisions about crop selection to optimize yield and sustainability.",
     category: "AI & ML",
-    tags: ["Python", "TensorFlow", "OpenAI", "FastAPI"],
-    image: "/projects/ai.jpg",
-    liveUrl: "#",
-    githubUrl: "#",
+    tags: ["Nextjs", "Tensorflow", "Numpy", "CNN","Fastapi", "Pandas"],
+    image: "/projects/crop-ai.png",
+    liveUrl: "https://crop-recommendation-system-iota.vercel.app/",
+    githubUrl: "https://github.com/Amanbig/crop-recommendation-system",
     featured: true
   },
   {
     id: "6",
-    title: "Data Visualization Dashboard",
-    description: "Interactive analytics and reporting platform",
-    longDescription: "A comprehensive dashboard for data visualization and analytics with real-time updates, custom charts, and export functionality.",
-    category: "Web Development",
-    tags: ["React", "D3.js", "Python", "PostgreSQL"],
+    title: "Gem AI",
+    description: "Gem AI App is a versatile application that allows users to generate various types of creative content, including songs, stories, and paragraphs.",
+    longDescription: "Gem AI App is a versatile application that allows users to generate various types of creative content, including songs, stories, and paragraphs. It also features a dynamic conversation module with an AI model, as well as built-in connectivity checks.",
+    category: "Mobile Development",
+    tags: ["dart", "firebase", "chatbot", "flutter", "story-generator", "gemini-api", "lyrics-generator"],
     image: "/projects/dashboard.jpg",
-    liveUrl: "#",
-    githubUrl: "#",
+    liveUrl: "https://github.com/Amanbig/Gemini_app",
+    githubUrl: "https://github.com/Amanbig/Gemini_app",
     featured: false
   }
 ];
@@ -165,10 +166,12 @@ export default function ProjectShowcase() {
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300" />
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-6xl opacity-50 group-hover:opacity-70 transition-opacity duration-300">
-                    {project.category === "Web Development" && "🌐"}
-                    {project.category === "Mobile Development" && "📱"}
-                    {project.category === "Game Development" && "🎮"}
-                    {project.category === "AI & ML" && "🤖"}
+                    {/* {project.category === "Web Development" && "🌐"} */}
+                    {/* {project.category === "AI & ML" && "🤖"} */}
+                    {/* {project.category === "Game Development" && "🎮"} */}
+                    {project.category === "Mobile Development" ? "📱" :
+                    <Image src={project.image} alt={project.title} layout="fill" objectFit="cover" />
+                    }
                   </div>
                 </div>
                 {project.featured && (
