@@ -25,20 +25,17 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-30 transition-all duration-300 ${scrolled ? "py-2" : "py-4"
-      }`}>
-      <div className={`absolute inset-0 transition-all duration-300 ${scrolled
-          ? "bg-black/90 backdrop-blur-lg border-b border-white/10"
-          : "bg-gradient-to-b from-black/80 via-black/50 to-transparent backdrop-blur-md"
+    <nav className={`fixed top-0 left-0 right-0 z-30 transition-all duration-300 py-4`}>
+      <div className={`absolute inset-0 transition-all duration-300 ${ "bg-black/90 backdrop-blur-lg border-b border-white/10"
         }`} />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6">
         <div className="flex items-center justify-between">
           <Link
-            href="#"
-            className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white/80 hover:to-sky-400 transition-all duration-300"
+            href="/"
+            className="text-xl font-bold bg-clip-text dark:text-white text-black bg-gradient-to-r from-white to-white/80 hover:to-sky-400 transition-all duration-300"
           >
-            <BlurText text="Amanbig" animateBy="letters" delay={30} direction="top" />
+            <BlurText text="Amanpreet." animateBy="letters" delay={30} direction="top" />
           </Link>
 
           {/* Desktop Navigation */}

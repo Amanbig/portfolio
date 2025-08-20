@@ -170,7 +170,7 @@ export default function ProjectShowcase() {
                     {/* {project.category === "AI & ML" && "🤖"} */}
                     {/* {project.category === "Game Development" && "🎮"} */}
                     {project.category === "Mobile Development" ? "📱" :
-                    <Image src={project.image} alt={project.title} layout="fill" objectFit="cover" />
+                    <Image src={project.image} alt={project.title} fill className="object-cover"/>
                     }
                   </div>
                 </div>

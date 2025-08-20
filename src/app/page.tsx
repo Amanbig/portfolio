@@ -1,7 +1,7 @@
 "use client";
 import Squares from "@/components/Backgrounds/Squares/Squares";
 import FloatingElements from "@/components/FloatingElements/FloatingElements";
-import ScrollProgress from "@/components/ScrollProgress/ScrollProgress";
+// import ScrollProgress from "@/components/ScrollProgress/ScrollProgress";
 import BackToTop from "@/components/BackToTop/BackToTop";
 import Navbar from "@/components/Navbar/Navbar";
 import Hero from "@/components/Hero/Hero";
@@ -20,9 +20,7 @@ export default function Home() {
   return (
     <div className="relative w-full min-h-screen bg-black text-white overflow-hidden">
       {/* Progress & Navigation */}
-      <ScrollProgress />
-      <BackToTop />
-
+<BackToTop />
       {/* Background Elements */}
       <div className="absolute inset-0 w-full h-full">
         <Squares
@@ -70,6 +68,8 @@ export default function Home() {
 
         {/* Contact Section */}
         <Contact />
+
+        {/* <ScrollProgress /> */}
       </main>
 
       {/* Footer */}

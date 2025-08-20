@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "motion/react";
-import Image from "next/image";
+import Image  from  "next/image";
 
 type Project = {
   title: string;
@@ -67,7 +67,7 @@ export default function FeaturedWork() {
                 {/* Placeholder for project image */}
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-8xl">
-                    <Image src={project.image} alt={project.title} layout="fill" objectFit="cover" />
+                    <Image src={project.image} alt={project.title} fill className="object-cover" />
                   </div>
                 </div>
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-500" />
