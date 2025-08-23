@@ -22,7 +22,7 @@ const projects: Project[] = [
     title: "FileEx",
     description: "A modern, feature-rich file explorer built with Tauri, React, TypeScript, and shadcn/ui.",
     longDescription: "FileEx provides a clean, intuitive interface for managing files and folders with advanced features and beautiful UI components.",
-    category: "Mobile development",
+    category: "Desktop Development",
     tags: ["rust", "typescript", "tauri", "tailwindcss", "vite", "shadcnui"],
     image: "/projects/fileex.png",
     liveUrl: "https://github.com/Amanbig/fileEx/releases/",
@@ -103,7 +103,7 @@ const projects: Project[] = [
   }
 ];
 
-const categories = ["All", "Web Development", "Mobile Development", "Game Development", "AI & ML"];
+const categories = ["All", "Web Development", "Mobile Development", "Game Development", "AI & ML", "Desktop Development"];
 
 export default function ProjectShowcase() {
   const [activeCategory, setActiveCategory] = useState("All");
