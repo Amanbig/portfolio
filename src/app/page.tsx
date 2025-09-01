@@ -8,7 +8,7 @@ import Hero from "@/components/Hero/Hero";
 import About from "@/components/About/About";
 import Services from "@/components/Services/Services";
 import Stats from "@/components/Stats/Stats";
-import Skills from "@/components/Skills/Skills";
+// import Skills from "@/components/Skills/Skills";
 import Process from "@/components/Process/Process";
 import Timeline from "@/components/Timeline/Timeline";
 import ProjectShowcase from "@/components/ProjectShowcase/ProjectShowcase";
@@ -51,7 +51,7 @@ export default function Home() {
         <Stats />
 
         {/* Skills Section */}
-        <Skills />
+        {/* <Skills /> */}
 
         {/* Process Section */}
         <Process />
