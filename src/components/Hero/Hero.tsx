@@ -87,7 +87,7 @@ export default function Hero() {
             className="bg-clip-text text-white bg-gradient-to-r from-white via-blue-200 to-purple-200"
           >
             <BlurText
-              text="Hi, I'm Aman"
+              text="Hi, I'm Amanpreet"
               animateBy="words"
               delay={100}
               direction="top"
