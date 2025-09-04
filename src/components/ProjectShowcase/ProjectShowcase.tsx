@@ -19,6 +19,18 @@ interface Project {
 const projects: Project[] = [
   {
     id: "1",
+    title: "Chatme",
+    description: "A modern, cross-platform AI chat application built with Tauri, React, and TypeScript. ChatMe supports multiple AI providers with a beautiful, responsive interface and advanced features.",
+    longDescription: "A modern, cross-platform AI chat application built with Tauri, React, and TypeScript. ChatMe supports multiple AI providers with a beautiful, responsive interface and advanced features.",
+    category: "Desktop Development",
+    tags: ["rust", "typescript", "tauri", "tailwindcss", "vite", "shadcnui","openai-api","gemini-api","ollama-api"],
+    image: "/projects/chatme.png",
+    liveUrl: "https://github.com/Amanbig/ChatMe/releases",
+    githubUrl: "https://github.com/Amanbig/ChatMe",
+    featured: true
+  },
+  {
+    id: "2",
     title: "NextPy",
     description: "A powerful command-line tool for creating full-stack applications with NextJS frontend and Python FastAPI backend.",
     longDescription: "A powerful command-line tool for creating full-stack applications with NextJS frontend and Python FastAPI backend.",
@@ -30,7 +42,7 @@ const projects: Project[] = [
     featured: true
   },
   {
-    id: "2",
+    id: "3",
     title: "FileEx",
     description: "A modern, feature-rich file explorer built with Tauri, React, TypeScript, and shadcn/ui.",
     longDescription: "FileEx provides a clean, intuitive interface for managing files and folders with advanced features and beautiful UI components.",
@@ -42,7 +54,7 @@ const projects: Project[] = [
     featured: true
   },
   {
-    id: "3",
+    id: "4",
     title: "Backtool",
     description: "A CLI tool to generate backend structures for Node.js applications with support for multiple databases and a visually appealing user interface.",
     longDescription: "BackTool simplifies the process of setting up a Node.js backend by generating a complete project structure, including a server entry point, models, database configuration, controllers, routes, middleware, and a customized package.json. It supports MongoDB, PostgreSQL, MySQL, and SQLite, allowing developers to quickly scaffold a backend tailored to their preferred database.",
@@ -54,7 +66,7 @@ const projects: Project[] = [
     featured: true
   },
   {
-    id: "4", 
+    id: "5", 
     title: "Persona AI",
     description: "A full-stack web application that predicts personality type (introvert, extrovert, or ambivert) using AI/ML models.",
     longDescription: "A full-stack web application that predicts personality type (introvert, extrovert, or ambivert) using AI/ML models. Built with Next.js (frontend) and Python FastAPI (backend).",
@@ -66,7 +78,7 @@ const projects: Project[] = [
     featured: false
   },
   {
-    id: "5",
+    id: "6",
     title: "Satellite AI",
     description: "A modern web application that uses AI to classify different types of areas from satellite images.",
     longDescription: "A modern web application that uses AI to classify different types of areas from satellite images. The application can identify various terrains like deserts, plains, and other landscapes from satellite imagery.",
@@ -78,7 +90,7 @@ const projects: Project[] = [
     featured: false
   },
   {
-    id: "6",
+    id: "7",
     title: "TomatoGuard AI",
     description: "TomatoGuard AI is a comprehensive web application that uses Convolutional Neural Networks (CNN) to detect diseases in tomato plants.",
     longDescription: "TomatoGuard AI is a comprehensive web application that uses Convolutional Neural Networks (CNN) to detect diseases in tomato plants. The system provides real-time analysis, detailed disease information, and research insights.",
@@ -90,7 +102,7 @@ const projects: Project[] = [
     featured: true
   },
   {
-    id: "7",
+    id: "8",
     title: "Crop Recommendation System",
     description: "A comprehensive machine learning-powered web application that provides intelligent crop recommendations based on soil and environmental parameters.",
     longDescription: "A comprehensive machine learning-powered web application that provides intelligent crop recommendations based on soil and environmental parameters.The system helps farmers and agricultural professionals make informed decisions about crop selection to optimize yield and sustainability.",
@@ -102,7 +114,7 @@ const projects: Project[] = [
     featured: true
   },
   {
-    id: "8",
+    id: "9",
     title: "Gem AI",
     description: "Gem AI App is a versatile application that allows users to generate various types of creative content, including songs, stories, and paragraphs.",
     longDescription: "Gem AI App is a versatile application that allows users to generate various types of creative content, including songs, stories, and paragraphs. It also features a dynamic conversation module with an AI model, as well as built-in connectivity checks.",
