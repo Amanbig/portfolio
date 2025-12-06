@@ -3,6 +3,13 @@ import { motion } from "motion/react";
 
 const events = [
   {
+    hash: "f4g5h6i",
+    author: "Amanpreet <aman@portfolio>",
+    date: "Sep 2025 - Present",
+    message: "feat: Software Developer Intern at Vexocore (Remote)",
+    details: "Spearheaded the design and implementation of the Prishigo ride-sharing platform (Rapido clone), utilizing Flutter for the frontend and ExpressJS for a robust, real-time backend. Developed two distinct applications (Captain and User) incorporating real-time GPS tracking, payment integration, and scalable services focused on efficient request matching and high availability."
+  },
+  {
     hash: "a1b2c3d",
     author: "Amanpreet <aman@portfolio>",
     date: "Fri Jan 10 2025",
