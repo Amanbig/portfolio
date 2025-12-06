@@ -1,15 +1,33 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0a0a0a;
-  --foreground: #ededed;
+  /* Terminal Theme Colors */
+  --background: #0d1117;
+  /* GitHub Dark Dimmed / Terminal Black */
+  --foreground: #c9d1d9;
+  /* Terminal White/Gray */
+
+  --terminal-green: #00ff00;
+  --terminal-blue: #58a6ff;
+  --terminal-yellow: #f1e05a;
+  --terminal-red: #ff7b72;
+  --terminal-purple: #bc8cff;
+  --terminal-cyan: #39c5cf;
+
+  --font-mono: 'JetBrains Mono', 'Fira Code', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-mono: var(--font-mono);
+
+  --color-terminal-green: var(--terminal-green);
+  --color-terminal-blue: var(--terminal-blue);
+  --color-terminal-yellow: var(--terminal-yellow);
+  --color-terminal-red: var(--terminal-red);
+  --color-terminal-purple: var(--terminal-purple);
+  --color-terminal-cyan: var(--terminal-cyan);
 }
 
 html {
@@ -19,44 +37,59 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-mono);
+  overflow-x: hidden;
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
+  width: 10px;
+  background: var(--background);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 4px;
+  background: #30363d;
+  border: 1px solid var(--background);
+  border-radius: 0;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: #484f58;
 }
 
 /* Selection styles */
 ::selection {
-  background: rgba(59, 130, 246, 0.3);
-  color: white;
+  background: var(--terminal-green);
+  color: black;
 }
 
-/* Utility classes */
-.line-clamp-2 {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+/* Terminal Utilities */
+.terminal-cursor::after {
+  content: '▋';
+  animation: blink 1s step-start infinite;
+  color: var(--terminal-green);
+  margin-left: 2px;
 }
 
-.line-clamp-3 {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.scanline {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0) 50%,
+      rgba(0, 0, 0, 0.1) 50%,
+      rgba(0, 0, 0, 0.1));
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.15;
 }
