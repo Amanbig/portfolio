@@ -20,9 +20,9 @@ const projects: Project[] = [
   {
     id: "1",
     title: "chatme",
-    description: "AI chat app built with Tauri & React",
+    description: "Agent-driven AI desktop app with voice & cross-platform support",
     category: "Desktop",
-    tags: ["rust", "react", "tauri"],
+    tags: ["rust", "react", "tauri", "agents", "voice"],
     image: "/projects/chatme.png",
     liveUrl: "https://github.com/Amanbig/ChatMe/releases",
     githubUrl: "https://github.com/Amanbig/ChatMe",
@@ -59,9 +59,9 @@ const projects: Project[] = [
   {
     id: "4",
     title: "backtool",
-    description: "Node.js backend generator CLI",
+    description: "Node.js backend generator CLI with multi-DB & visual UI",
     category: "Web",
-    tags: ["node", "cli", "backend"],
+    tags: ["node", "cli", "backend", "mongodb", "postgres"],
     image: "/projects/backtool.png",
     liveUrl: "https://www.npmjs.com/package/backtool",
     githubUrl: "https://github.com/Amanbig/backTool",
@@ -71,58 +71,32 @@ const projects: Project[] = [
   },
   {
     id: "5",
-    title: "persona-ai",
-    description: "Personality prediction using ML",
+    title: "mlcore",
+    description: "Self-hosted ML platform — upload datasets, train & monitor models",
     category: "AI/ML",
-    tags: ["python", "ml", "nextjs"],
-    image: "/projects/Persona-AI.png",
-    liveUrl: "https://introver-extrovert.vercel.app/",
-    githubUrl: "https://github.com/Amanbig/Introver-Extrovert",
-    featured: false,
-    date: "Jun 10 11:20",
-    permissions: "-rw-r--r--"
-  },
-  {
-    id: "6",
-    title: "satellite-ai",
-    description: "Satellite image classification",
-    category: "AI/ML",
-    tags: ["tensorflow", "cnn", "python"],
-    image: "/projects/satellite-ai.png",
-    liveUrl: "https://satellite-ai-three.vercel.app/",
-    githubUrl: "https://github.com/Amanbig/Satellite-AI",
-    featured: false,
-    date: "May 25 13:00",
-    permissions: "-rw-r--r--"
-  },
-  {
-    id: "7",
-    title: "tomatoguard",
-    description: "Tomato disease detection AI",
-    category: "AI/ML",
-    tags: ["cnn", "tensorflow", "agritech"],
-    image: "/projects/tomato-guard-ai.png",
-    liveUrl: "https://cnn-based-tomato-disease-prediction.vercel.app/",
-    githubUrl: "https://github.com/Amanbig/CNN-based-Tomato-disease-prediction",
+    tags: ["python", "fastapi", "grafana", "ml", "docker"],
+    image: "/projects/mlcore.png",
+    liveUrl: "https://github.com/Amanbig/MLCore",
+    githubUrl: "https://github.com/Amanbig/MLCore",
     featured: true,
-    date: "Apr 12 08:45",
+    date: "Mar 10 10:30",
     permissions: "-rwxr-xr-x"
   },
   {
-    id: "8",
-    title: "crop-rec",
-    description: "Intelligent crop recommendation",
-    category: "AI/ML",
-    tags: ["ml", "python", "agritech"],
-    image: "/projects/crop-ai.png",
-    liveUrl: "https://crop-recommendation-system-iota.vercel.app/",
-    githubUrl: "https://github.com/Amanbig/crop-recommendation-system",
+    id: "6",
+    title: "runapi",
+    description: "File-based routing framework for FastAPI (Next.js style)",
+    category: "Web",
+    tags: ["python", "fastapi", "framework", "pypi"],
+    image: "/projects/runapi.png",
+    liveUrl: "https://pypi.org/project/runapi/",
+    githubUrl: "https://github.com/Amanbig/runapi",
     featured: true,
-    date: "Mar 30 15:10",
-    permissions: "-rw-r--r--"
+    date: "Nov 12 11:00",
+    permissions: "-rwxr-xr-x"
   },
   {
-    id: "9",
+    id: "7",
     title: "gem-ai",
     description: "Creative content generator app",
     category: "Mobile",
@@ -135,7 +109,7 @@ const projects: Project[] = [
     permissions: "-rwxr-xr-x"
   },
   {
-    id: "10",
+    id: "8",
     title: "fileshare",
     description: "Secure file sharing platform",
     category: "Web",
@@ -148,7 +122,7 @@ const projects: Project[] = [
     permissions: "-rwxr-xr-x"
   },
   {
-    id: "11",
+    id: "9",
     title: "music-level",
     description: "AI-powered music generation",
     category: "Web",
@@ -160,22 +134,36 @@ const projects: Project[] = [
     date: "Dec 05 16:20",
     permissions: "-rwxr-xr-x"
   },
+  // OSS Contributions
   {
-    id: "12",
-    title: "runapi",
-    description: "CLI tool for API testing",
-    category: "Web",
-    tags: ["python", "cli", "pypi"],
-    image: "/projects/runapi.png",
-    liveUrl: "https://pypi.org/project/runapi/",
-    githubUrl: "https://github.com/Amanbig/runapi",
+    id: "10",
+    title: "haystack",
+    description: "Contrib: JSON parsing refactor, pipeline deprecation & docs",
+    category: "OSS",
+    tags: ["python", "oss", "deepset", "llm", "ai"],
+    image: "/projects/haystack.png",
+    liveUrl: "https://github.com/deepset-ai/haystack/pulls?q=is%3Apr+author%3AAmanbig",
+    githubUrl: "https://github.com/deepset-ai/haystack",
     featured: true,
-    date: "Nov 12 11:00",
-    permissions: "-rwxr-xr-x"
-  }
+    date: "Feb 20 09:00",
+    permissions: "drwxr-xr-x"
+  },
+  {
+    id: "11",
+    title: "haystack-integrations",
+    description: "Contrib: MongoDB Atlas metadata exploration methods",
+    category: "OSS",
+    tags: ["python", "mongodb", "oss", "deepset", "atlas"],
+    image: "/projects/haystack.png",
+    liveUrl: "https://github.com/deepset-ai/haystack-core-integrations/pulls?q=is%3Apr+author%3AAmanbig",
+    githubUrl: "https://github.com/deepset-ai/haystack-core-integrations",
+    featured: true,
+    date: "Jan 15 14:00",
+    permissions: "drwxr-xr-x"
+  },
 ];
 
-const categories = ["All", "Web", "Desktop", "Mobile", "AI/ML"];
+const categories = ["All", "Web", "Desktop", "Mobile", "AI/ML", "OSS"];
 
 export default function ProjectShowcase() {
   const [activeCategory, setActiveCategory] = useState("All");
@@ -188,11 +176,14 @@ export default function ProjectShowcase() {
     <section id="projects" className="py-20 max-w-6xl mx-auto w-full px-4 font-mono">
       <div className="bg-[#0d1117] border border-[#30363d] rounded-lg overflow-hidden shadow-xl">
         {/* Terminal Header */}
-        <div className="bg-[#161b22] px-4 py-2 border-b border-[#30363d] flex items-center justify-between">
+        <div className="bg-[#161b22] px-4 py-2.5 border-b border-[#30363d] flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="text-[#8b949e] text-xs">projects-list</span>
           </div>
-          <div className="text-[#8b949e] text-xs">zsh</div>
+          <div className="flex items-center gap-3 text-[#8b949e] text-xs">
+            <span>Total: {projects.length}</span>
+            <span>zsh</span>
+          </div>
         </div>
 
         <div className="p-6 md:p-10">
@@ -201,16 +192,21 @@ export default function ProjectShowcase() {
             <span className="text-green-400">➜</span> <span className="text-blue-400">~</span> cd projects && ls -la
           </div>
 
-          {/* Category Filter as 'folders' */}
-          <div className="flex flex-wrap gap-4 mb-8 text-sm">
+          {/* Category Filter */}
+          <div className="flex flex-wrap gap-2 mb-8">
             {categories.map((category) => (
               <button
                 key={category}
                 onClick={() => setActiveCategory(category)}
-                className={`flex items-center gap-1 hover:text-blue-400 transition-colors ${activeCategory === category ? "text-blue-400 font-bold" : "text-[#8b949e]"
-                  }`}
+                className={`flex items-center gap-1.5 px-3 py-1 rounded text-xs transition-all border ${
+                  activeCategory === category
+                    ? category === "OSS"
+                      ? "bg-purple-500/15 text-purple-300 border-purple-500/40 font-bold"
+                      : "bg-blue-500/10 text-blue-400 border-blue-400/40 font-bold"
+                    : "text-[#8b949e] border-[#30363d] hover:border-[#484f58] hover:text-[#c9d1d9]"
+                }`}
               >
-                <span className="text-yellow-400">📁</span>
+                <span>{category === "OSS" ? "🌐" : category === "All" ? "✦" : "📁"}</span>
                 {category}
               </button>
             ))}
@@ -218,13 +214,13 @@ export default function ProjectShowcase() {
 
           {/* File List */}
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm md:text-base border-collapse">
+            <table className="w-full text-left text-xs border-collapse">
               <thead>
-                <tr className="text-[#8b949e] border-b border-[#30363d]">
-                  <th className="pb-2 font-normal">Permissions</th>
-                  <th className="pb-2 font-normal">User</th>
-                  <th className="pb-2 font-normal">Date</th>
-                  <th className="pb-2 font-normal">Name</th>
+                <tr className="text-[#484f58] border-b border-[#30363d]">
+                  <th className="pb-2 font-normal whitespace-nowrap pr-4">Permissions</th>
+                  <th className="pb-2 font-normal whitespace-nowrap pr-4">User</th>
+                  <th className="pb-2 font-normal whitespace-nowrap pr-4">Date</th>
+                  <th className="pb-2 font-normal pr-4">Name</th>
                   <th className="pb-2 font-normal">Description</th>
                   <th className="pb-2 font-normal text-right">Actions</th>
                 </tr>
@@ -235,22 +231,52 @@ export default function ProjectShowcase() {
                     key={project.id}
                     initial={{ opacity: 0, x: -10 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.05 }}
-                    className="group hover:bg-[#161b22] transition-colors border-b border-[#30363d]/50 last:border-0"
+                    transition={{ delay: index * 0.04 }}
+                    className={`group transition-colors border-b border-[#30363d]/40 last:border-0 ${
+                      project.category === "OSS" ? "hover:bg-[#1a1030]" : "hover:bg-[#161b22]"
+                    }`}
                   >
-                    <td className="py-3 text-[#8b949e] whitespace-nowrap pr-4">{project.permissions}</td>
-                    <td className="py-3 text-[#e0af68] whitespace-nowrap pr-4">aman</td>
-                    <td className="py-3 text-[#8b949e] whitespace-nowrap pr-4">{project.date}</td>
-                    <td className="py-3 font-bold text-blue-400 whitespace-nowrap pr-4 group-hover:underline">
-                      {project.title}
-                      {project.featured && <span className="text-yellow-400 ml-1">*</span>}
+                    <td className={`py-3 whitespace-nowrap pr-6 font-mono text-[10px] ${project.category === "OSS" ? "text-purple-400/50" : "text-[#484f58]"}`}>
+                      {project.permissions}
                     </td>
-                    <td className="py-3 text-[#c9d1d9] min-w-[200px] pr-4">{project.description}</td>
+                    <td className="py-3 text-[#e0af68] whitespace-nowrap pr-4">aman</td>
+                    <td className="py-3 text-[#484f58] whitespace-nowrap pr-6">{project.date}</td>
+                    <td className="py-3 pr-6 whitespace-nowrap">
+                      <div className="flex flex-col gap-1">
+                        <div className="flex items-center gap-1.5">
+                          {project.category === "OSS" ? (
+                            <span className="text-purple-400 font-bold group-hover:underline">{project.title}</span>
+                          ) : (
+                            <span className="text-blue-400 font-bold group-hover:underline">{project.title}</span>
+                          )}
+                          {project.featured && <span className="text-yellow-400">*</span>}
+                          {project.category === "OSS" && (
+                            <span className="text-[9px] px-1.5 py-0.5 rounded bg-purple-500/15 text-purple-300 border border-purple-500/30">
+                              contrib
+                            </span>
+                          )}
+                        </div>
+                        {/* Top 2 tag pills */}
+                        <div className="flex gap-1">
+                          {project.tags.slice(0, 2).map(tag => (
+                            <span key={tag} className="text-[9px] px-1.5 py-0.5 rounded bg-[#21262d] text-[#8b949e] border border-[#30363d]">{tag}</span>
+                          ))}
+                        </div>
+                      </div>
+                    </td>
+                    <td className="py-3 text-[#8b949e] pr-4 max-w-[240px]">
+                      <span className="block truncate" title={project.description}>{project.description}</span>
+                    </td>
                     <td className="py-3 text-right whitespace-nowrap">
-                      <div className="flex justify-end gap-3 opacity-50 group-hover:opacity-100 transition-opacity">
+                      <div className="flex justify-end gap-3 opacity-40 group-hover:opacity-100 transition-opacity">
                         {project.liveUrl && (
-                          <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="text-green-400 hover:text-green-300">
-                            [run]
+                          <a
+                            href={project.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`hover:opacity-80 transition-opacity ${project.category === "OSS" ? "text-purple-400" : "text-green-400"}`}
+                          >
+                            {project.category === "OSS" ? "[prs]" : "[run]"}
                           </a>
                         )}
                         {project.githubUrl && (
