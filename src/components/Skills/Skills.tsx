@@ -48,8 +48,9 @@ const jsonSkills = {
     python: "^3.11.0",
     "javascript/ts": "^20.0.0",
     "fastapi": "^0.115.0",
-    "next.js": "^15.0.0",
-    rust: "^1.80.0",
+    "next.js": "^15.5.0",
+    react: "19.1.0",
+    rust: "^1.83.0",
     flutter: "^3.24.0",
   },
   devDependencies: {
@@ -57,8 +58,8 @@ const jsonSkills = {
     "aws-sdk": "^3.0.0",
     tensorflow: "^2.17.0",
     pytorch: "^2.4.0",
-    postgresql: "^16.0.0",
-    mongodb: "^7.0.0",
+    tailwindcss: "^4.0.0",
+    typescript: "^5.7.0",
   },
 };
 
