@@ -73,22 +73,23 @@ export default function Home() {
      AND the user keeps scrolling past it (≥100 px extra intent).
   ── */
   useEffect(() => {
-    /* accDelta / lastSign intentionally reset each page — they're per-page state.
-       lastFlipAt is a REF so it survives across re-runs and prevents back-to-back
-       flips caused by residual trackpad events after a page change. */
+    /* Capture the element NOW (at effect setup), not at event time.
+       This avoids ref-timing bugs where scrollRef.current has already
+       moved to the next page's element when the handler fires. */
+    const el = scrollRef.current;
+    if (!el) return;
+
     let accDelta = 0;
     let lastSign = 0;
 
     const onWheel = (e: WheelEvent) => {
       if (animating.current) return;
 
-      const el = scrollRef.current;
-      if (!el) return;
-
       const sign = Math.sign(e.deltaY);
       if (sign !== lastSign && lastSign !== 0) accDelta = 0;
       lastSign = sign;
 
+      /* Use the captured el — always the right container for this page */
       const atBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 4;
       const atTop    = el.scrollTop <= 4;
 
@@ -106,8 +107,9 @@ export default function Home() {
       goTo(page + (e.deltaY > 0 ? 1 : -1));
     };
 
-    window.addEventListener("wheel", onWheel, { passive: true });
-    return () => window.removeEventListener("wheel", onWheel);
+    /* Listen on the container itself, not window */
+    el.addEventListener("wheel", onWheel, { passive: true });
+    return () => el.removeEventListener("wheel", onWheel);
   }, [page, goTo]);
 
   /* ── Keyboard navigation ── */
