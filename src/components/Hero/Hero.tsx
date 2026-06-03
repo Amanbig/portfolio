@@ -1,8 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 
 const roles = ["Backend Engineer", "OSS Contributor", "API Developer", "Systems Builder"];
 
@@ -31,7 +32,7 @@ const socials = [
   { label: "Email",    href: "mailto:amanpreetsinghjhiwant7@gmail.com" },
 ];
 
-export default function Hero() {
+export default function Hero({ onNavigate }: { onNavigate?: (i: number) => void }) {
   const [roleIndex, setRoleIndex] = useState(0);
 
   useEffect(() => {
@@ -117,12 +118,18 @@ export default function Hero() {
             </p>
 
             <div className="flex flex-wrap gap-3">
-              <Button size="lg" className="text-sm px-6" asChild>
-                <a href="#projects">View Projects</a>
-              </Button>
-              <Button size="lg" variant="outline" className="text-sm px-6" asChild>
-                <a href="#contact">Get in Touch</a>
-              </Button>
+              <button
+                onClick={() => onNavigate?.(3)}
+                className={cn(buttonVariants({ size: "lg" }), "text-sm px-6")}
+              >
+                View Projects
+              </button>
+              <button
+                onClick={() => onNavigate?.(5)}
+                className={cn(buttonVariants({ variant: "outline", size: "lg" }), "text-sm px-6")}
+              >
+                Get in Touch
+              </button>
             </div>
 
             {/* Social links */}
