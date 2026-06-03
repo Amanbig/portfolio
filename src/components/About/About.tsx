@@ -1,37 +1,47 @@
 "use client";
 import { motion } from "motion/react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 
 const highlights = [
   {
-    title: "Backend Engineer",
-    desc: "Specialize in FastAPI, RAG pipelines, and Dockerized ML platforms for production.",
-    badge: "bg-blue-500/10 text-blue-400 border-blue-500/20",
+    icon: "⚙️",
+    title: "Backend Engineering",
+    desc: "FastAPI, RAG pipelines, Dockerized ML platforms for production at scale.",
+    accent: "from-blue-500/20 to-blue-500/5",
+    border: "border-blue-500/20",
+    tag: "text-blue-400",
   },
   {
+    icon: "🌐",
     title: "OSS Contributor",
     desc: "Merged PRs in deepset-ai/haystack and haystack-core-integrations.",
-    badge: "bg-green-500/10 text-green-400 border-green-500/20",
+    accent: "from-green-500/20 to-green-500/5",
+    border: "border-green-500/20",
+    tag: "text-green-400",
   },
   {
+    icon: "🚀",
     title: "Full-Stack Capable",
-    desc: "Build end-to-end with Next.js, Flutter, NestJS on top of strong backends.",
-    badge: "bg-purple-500/10 text-purple-400 border-purple-500/20",
+    desc: "End-to-end with Next.js, Flutter, NestJS on top of strong backend foundations.",
+    accent: "from-purple-500/20 to-purple-500/5",
+    border: "border-purple-500/20",
+    tag: "text-purple-400",
   },
   {
+    icon: "🛠️",
     title: "Developer Tooling",
     desc: "Creator of RunAPI (PyPI) & backTool (npm) — frameworks used by real developers.",
-    badge: "bg-amber-500/10 text-amber-400 border-amber-500/20",
+    accent: "from-amber-500/20 to-amber-500/5",
+    border: "border-amber-500/20",
+    tag: "text-amber-400",
   },
 ];
 
 const stats = [
-  { label: "Years Experience", value: "3+" },
-  { label: "Projects Shipped", value: "15+" },
-  { label: "OSS PRs Merged", value: "4" },
-  { label: "Docker Pulls", value: "350+" },
+  { value: "3+",    label: "Years Experience" },
+  { value: "15+",   label: "Projects Shipped" },
+  { value: "4",     label: "OSS PRs Merged" },
+  { value: "769+",  label: "Docker Pulls" },
 ];
 
 const interests = [
@@ -45,7 +55,7 @@ const interests = [
 export default function About() {
   return (
     <section id="about" className="scroll-mt-20">
-      {/* Section header */}
+      {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -57,42 +67,31 @@ export default function About() {
         <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">Who I Am</h2>
       </motion.div>
 
-      <div className="flex flex-col lg:flex-row gap-10">
-        {/* Main bio */}
+      {/* Bio + Stats row */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-10">
+        {/* Bio */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="flex-1 space-y-5"
+          className="lg:col-span-2 space-y-4"
         >
-          <p className="text-foreground leading-relaxed">
-            Hi there! I&apos;m{" "}
+          <p className="text-foreground leading-relaxed text-base">
+            Hi! I&apos;m{" "}
             <span className="font-semibold text-primary">Amanpreet Singh</span> — a{" "}
             <span className="font-semibold">Backend Engineer</span> specializing in FastAPI,
             scalable systems, and applied AI with over{" "}
-            <span className="font-semibold">3 years of experience</span>.
+            <span className="font-semibold text-foreground">3 years of experience</span>.
           </p>
           <p className="text-muted-foreground leading-relaxed">
-            I&apos;ve built RAG pipelines for government clients, published open-source frameworks
-            like{" "}
-            <a
-              href="https://github.com/Amanbig/runapi"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary hover:underline underline-offset-4"
-            >
-              RunAPI
-            </a>{" "}
+            I&apos;ve built RAG pipelines for government clients (JAC, NDMC), published
+            open-source frameworks like{" "}
+            <a href="https://github.com/Amanbig/runapi" target="_blank" rel="noopener noreferrer"
+              className="text-primary hover:underline underline-offset-4">RunAPI</a>{" "}
             and{" "}
-            <a
-              href="https://github.com/Amanbig/MLCore"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary hover:underline underline-offset-4"
-            >
-              MLCore
-            </a>
+            <a href="https://github.com/Amanbig/MLCore" target="_blank" rel="noopener noreferrer"
+              className="text-primary hover:underline underline-offset-4">MLCore</a>
             , and contributed merged PRs to{" "}
             <span className="text-foreground font-medium">deepset-ai/haystack</span>.
           </p>
@@ -101,96 +100,66 @@ export default function About() {
             and enjoy working on developer tooling that makes engineers&apos; lives easier.
           </p>
 
-          <Separator />
+          <Separator className="my-2" />
 
-          <div>
-            <h3 className="text-sm font-semibold text-foreground mb-3">Interests</h3>
-            <ul className="space-y-2">
-              {interests.map((item) => (
-                <li key={item} className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <span className="w-1 h-1 rounded-full bg-primary flex-shrink-0" />
-                  {item}
-                </li>
-              ))}
-            </ul>
+          {/* Interests */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2">
+            {interests.map(item => (
+              <div key={item} className="flex items-center gap-2 text-sm text-muted-foreground">
+                <span className="w-1 h-1 rounded-full bg-primary flex-shrink-0" />
+                {item}
+              </div>
+            ))}
           </div>
         </motion.div>
 
-        {/* Sidebar */}
+        {/* Stats */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="lg:w-72 space-y-4"
+          className="grid grid-cols-2 gap-3 content-start"
         >
-          {/* Avatar card */}
-          <Card className="border-border">
-            <CardContent className="pt-6 text-center">
-              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-primary/30 to-cyan-500/30 border-2 border-primary/20 flex items-center justify-center mx-auto mb-4 text-2xl font-bold text-primary">
-                AS
-              </div>
-              <p className="font-semibold text-foreground">Amanpreet Singh</p>
-              <p className="text-sm text-muted-foreground mt-0.5">Backend Engineer</p>
-              <p className="text-xs text-muted-foreground mt-0.5">Chandigarh, India</p>
-
-              <div className="flex justify-center gap-4 mt-4">
-                {[
-                  { label: "GH", href: "https://github.com/Amanbig" },
-                  { label: "LI", href: "https://www.linkedin.com/in/amanpreet-singh-9a1929211" },
-                  { label: "Mail", href: "mailto:amanpreetsinghjhiwant7@gmail.com" },
-                ].map(({ label, href }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-xs text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    {label}
-                  </a>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Stats */}
-          <Card className="border-border">
-            <CardContent className="pt-5 pb-4">
-              <div className="grid grid-cols-2 gap-4">
-                {stats.map(({ label, value }) => (
-                  <div key={label} className="text-center">
-                    <p className="text-xl font-bold text-foreground">{value}</p>
-                    <p className="text-xs text-muted-foreground mt-0.5">{label}</p>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
+          {stats.map(({ value, label }) => (
+            <div
+              key={label}
+              className="rounded-xl border border-border bg-card px-4 py-4 text-center hover:bg-accent/30 transition-colors"
+            >
+              <p className="text-2xl font-bold text-foreground">{value}</p>
+              <p className="text-xs text-muted-foreground mt-1 leading-tight">{label}</p>
+            </div>
+          ))}
         </motion.div>
       </div>
 
       {/* Highlight cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-10">
-        {highlights.map((h, i) => (
-          <motion.div
-            key={h.title}
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.08, duration: 0.4 }}
-          >
-            <Card className="border-border h-full hover:bg-accent/30 transition-colors">
-              <CardContent className="pt-5">
-                <Badge variant="outline" className={`text-xs mb-3 ${h.badge}`}>
-                  {h.title}
-                </Badge>
-                <p className="text-sm text-muted-foreground leading-relaxed">{h.desc}</p>
-              </CardContent>
-            </Card>
-          </motion.div>
-        ))}
-      </div>
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: 0.25 }}
+      >
+        <p className="text-xs text-muted-foreground uppercase tracking-widest font-mono mb-4">
+          What I bring
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {highlights.map((h, i) => (
+            <motion.div
+              key={h.title}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.07, duration: 0.4 }}
+              className={`relative rounded-xl border ${h.border} bg-gradient-to-b ${h.accent} p-5 hover:scale-[1.02] transition-transform`}
+            >
+              <span className="text-2xl mb-3 block">{h.icon}</span>
+              <p className={`text-sm font-semibold mb-1.5 ${h.tag}`}>{h.title}</p>
+              <p className="text-xs text-muted-foreground leading-relaxed">{h.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
     </section>
   );
 }
