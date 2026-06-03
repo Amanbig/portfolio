@@ -162,6 +162,32 @@ export default function Skills() {
     }
   });
 
+  /* ── Compute streak & peak stats ── */
+  let longestStreak = 0, currentStreak = 0, tempStreak = 0;
+  let busiest = { date: "", count: 0 };
+  const monthTotals: Record<string, number> = {};
+
+  contribs.forEach(c => {
+    if (c.count > 0) {
+      tempStreak++;
+      longestStreak = Math.max(longestStreak, tempStreak);
+      if (c.count > busiest.count) busiest = { date: c.date, count: c.count };
+      const m = c.date.slice(0, 7);
+      monthTotals[m] = (monthTotals[m] ?? 0) + c.count;
+    } else {
+      tempStreak = 0;
+    }
+  });
+  // Current streak (count backwards from last entry)
+  for (let i = contribs.length - 1; i >= 0; i--) {
+    if (contribs[i].count > 0) currentStreak++;
+    else break;
+  }
+  const bestMonth = Object.entries(monthTotals).sort((a, b) => b[1] - a[1])[0];
+  const bestMonthLabel = bestMonth
+    ? new Date(bestMonth[0] + "-01").toLocaleString("default", { month: "long", year: "numeric" })
+    : null;
+
   return (
     <section id="skills" className="scroll-mt-20">
       {/* Header */}
@@ -360,13 +386,42 @@ export default function Skills() {
               ))}
             </div>
 
-            {/* Legend */}
-            <div className="flex items-center gap-1.5 mt-3">
-              <span className="text-[10px] text-muted-foreground">Less</span>
-              {cellBg.map((c, i) => (
-                <div key={i} className="w-3 h-3 rounded-sm" style={{ backgroundColor: c }} />
-              ))}
-              <span className="text-[10px] text-muted-foreground">More</span>
+            {/* Legend + stats */}
+            <div className="flex flex-wrap items-center justify-between gap-4 mt-4 pt-3 border-t border-border">
+              <div className="flex items-center gap-1.5">
+                <span className="text-[10px] text-muted-foreground">Less</span>
+                {cellBg.map((c, i) => (
+                  <div key={i} className="w-3 h-3 rounded-sm" style={{ backgroundColor: c }} />
+                ))}
+                <span className="text-[10px] text-muted-foreground">More</span>
+              </div>
+
+              <div className="flex flex-wrap gap-5">
+                {longestStreak > 0 && (
+                  <div className="text-center">
+                    <p className="text-sm font-bold text-foreground">{longestStreak}d</p>
+                    <p className="text-[10px] text-muted-foreground">Longest streak</p>
+                  </div>
+                )}
+                {currentStreak > 0 && (
+                  <div className="text-center">
+                    <p className="text-sm font-bold text-green-400">{currentStreak}d</p>
+                    <p className="text-[10px] text-muted-foreground">Current streak</p>
+                  </div>
+                )}
+                {busiest.count > 0 && (
+                  <div className="text-center">
+                    <p className="text-sm font-bold text-foreground">{busiest.count}</p>
+                    <p className="text-[10px] text-muted-foreground">Best day</p>
+                  </div>
+                )}
+                {bestMonthLabel && (
+                  <div className="text-center">
+                    <p className="text-sm font-bold text-foreground">{bestMonthLabel.split(" ")[0]}</p>
+                    <p className="text-[10px] text-muted-foreground">Most active month</p>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         ) : (

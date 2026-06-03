@@ -1,9 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { motion } from "motion/react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 
 interface Project {
   id: string;
@@ -137,10 +135,10 @@ const projects: Project[] = [
     description: "Contrib: JSON parsing refactor, pipeline deprecation & docs.",
     category: "OSS",
     tags: ["Python", "LLM", "AI"],
-    liveUrl:
-      "https://github.com/deepset-ai/haystack/pulls?q=is%3Apr+author%3AAmanbig",
+    liveUrl: "https://github.com/deepset-ai/haystack/pulls?q=is%3Apr+author%3AAmanbig",
     githubUrl: "https://github.com/deepset-ai/haystack",
     featured: true,
+    liveLabel: "PRs",
   },
   {
     id: "10",
@@ -149,21 +147,27 @@ const projects: Project[] = [
     description: "Contrib: MongoDB Atlas metadata exploration methods.",
     category: "OSS",
     tags: ["Python", "MongoDB", "Atlas"],
-    liveUrl:
-      "https://github.com/deepset-ai/haystack-core-integrations/pulls?q=is%3Apr+author%3AAmanbig",
+    liveUrl: "https://github.com/deepset-ai/haystack-core-integrations/pulls?q=is%3Apr+author%3AAmanbig",
     githubUrl: "https://github.com/deepset-ai/haystack-core-integrations",
     featured: true,
+    liveLabel: "PRs",
   },
 ];
 
 const categories = ["All", "Web", "Desktop", "AI/ML", "OSS"];
 
-const categoryColor: Record<string, string> = {
-  Web: "bg-blue-500/10 text-blue-400 border-blue-500/20",
-  Desktop: "bg-purple-500/10 text-purple-400 border-purple-500/20",
-  "AI/ML": "bg-green-500/10 text-green-400 border-green-500/20",
-  OSS: "bg-amber-500/10 text-amber-400 border-amber-500/20",
-  Mobile: "bg-cyan-500/10 text-cyan-400 border-cyan-500/20",
+/* Category accent colours — used for top border + hover glow */
+const catAccent: Record<string, { top: string; glow: string; badge: string }> = {
+  Web:     { top: "#3b82f6", glow: "rgba(59,130,246,0.10)",  badge: "bg-blue-500/10   text-blue-400   border-blue-500/20"  },
+  Desktop: { top: "#a855f7", glow: "rgba(168,85,247,0.10)",  badge: "bg-purple-500/10 text-purple-400 border-purple-500/20" },
+  "AI/ML": { top: "#22c55e", glow: "rgba(34,197,94,0.10)",   badge: "bg-green-500/10  text-green-400  border-green-500/20"  },
+  OSS:     { top: "#f59e0b", glow: "rgba(245,158,11,0.10)",  badge: "bg-amber-500/10  text-amber-400  border-amber-500/20"  },
+  Mobile:  { top: "#06b6d4", glow: "rgba(6,182,212,0.10)",   badge: "bg-cyan-500/10   text-cyan-400   border-cyan-500/20"   },
+};
+
+const langDot: Record<string, string> = {
+  Python: "#3572A5", TypeScript: "#3178c6", JavaScript: "#f1e05a",
+  Rust: "#dea584", Dart: "#00B4AB", "C++": "#f34b7d", Java: "#b07219",
 };
 
 export default function ProjectShowcase() {
@@ -189,22 +193,19 @@ export default function ProjectShowcase() {
       .catch(() => {});
   }, []);
 
-  const filtered =
-    active === "All" ? projects : projects.filter((p) => p.category === active);
+  const filtered = active === "All" ? projects : projects.filter((p) => p.category === active);
 
-  const getStats = (repo: string) => {
-    const d = githubData[repo.toLowerCase()];
-    return d ? { stars: d.stars, forks: d.forks } : null;
-  };
+  const getGH = (repo: string) => githubData[repo.toLowerCase()] ?? null;
 
   return (
     <section id="projects" className="scroll-mt-20">
+      {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
-        className="mb-12"
+        className="mb-10"
       >
         <p className="text-primary text-sm font-mono uppercase tracking-widest mb-2">Projects</p>
         <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">Things I&apos;ve Built</h2>
@@ -213,126 +214,163 @@ export default function ProjectShowcase() {
         </p>
       </motion.div>
 
-      {/* Category filter */}
+      {/* Category filters */}
       <div className="flex flex-wrap gap-2 mb-8">
-        {categories.map((cat) => (
-          <button
-            key={cat}
-            onClick={() => setActive(cat)}
-            className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-all ${
-              active === cat
-                ? "bg-primary text-primary-foreground border-primary"
-                : "border-border text-muted-foreground hover:text-foreground hover:border-border/80"
-            }`}
-          >
-            {cat}
-          </button>
-        ))}
+        {categories.map((cat) => {
+          const accent = catAccent[cat];
+          const isActive = active === cat;
+          return (
+            <button
+              key={cat}
+              onClick={() => setActive(cat)}
+              className="relative px-4 py-1.5 rounded-full text-sm font-medium border transition-all duration-200"
+              style={
+                isActive && accent
+                  ? { background: accent.glow, borderColor: accent.top, color: accent.top }
+                  : isActive
+                  ? undefined
+                  : {}
+              }
+              {...(!accent && isActive
+                ? { className: "px-4 py-1.5 rounded-full text-sm font-medium border bg-primary text-primary-foreground border-primary transition-all" }
+                : !isActive
+                ? { className: "px-4 py-1.5 rounded-full text-sm font-medium border border-border text-muted-foreground hover:text-foreground hover:border-muted-foreground transition-all" }
+                : {})}
+            >
+              {cat}
+            </button>
+          );
+        })}
       </div>
 
-      {/* Project grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {/* Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {filtered.map((project, i) => {
-          const ghStats = getStats(project.repoName);
+          const gh = getGH(project.repoName);
+          const accent = catAccent[project.category] ?? { top: "#6366f1", glow: "rgba(99,102,241,.08)", badge: "bg-indigo-500/10 text-indigo-400 border-indigo-500/20" };
+
           return (
             <motion.div
               key={project.id}
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.06, duration: 0.4 }}
+              transition={{ delay: i * 0.05, duration: 0.4 }}
+              className="group relative rounded-xl border border-border bg-card overflow-hidden flex flex-col
+                transition-all duration-300 hover:-translate-y-1"
+              style={{
+                ["--glow" as string]: accent.glow,
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLDivElement).style.boxShadow = `0 8px 30px ${accent.glow}, 0 0 0 1px ${accent.top}30`;
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLDivElement).style.boxShadow = "";
+              }}
             >
-              <Card className="border-border h-full hover:bg-accent/30 transition-colors group">
-                <CardContent className="pt-5 pb-4 flex flex-col h-full gap-3">
-                  {/* Header row */}
-                  <div className="flex items-start justify-between gap-2">
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <span className="font-semibold text-foreground text-sm leading-tight">
+              {/* Coloured top accent bar */}
+              <div className="h-[3px] w-full flex-shrink-0" style={{ background: `linear-gradient(to right, ${accent.top}, ${accent.top}50)` }} />
+
+              <div className="p-5 flex flex-col flex-1 gap-3">
+                {/* Title row */}
+                <div className="flex items-start justify-between gap-3">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex flex-wrap items-center gap-2 mb-0.5">
+                      <span className="font-semibold text-foreground text-base leading-tight truncate">
                         {project.title}
                       </span>
                       {project.featured && (
-                        <Badge
-                          variant="outline"
-                          className="text-[10px] py-0 px-1.5 border-primary/30 text-primary"
-                        >
+                        <span className="text-[10px] px-1.5 py-0.5 rounded-full font-medium"
+                          style={{ background: `${accent.top}18`, color: accent.top, border: `1px solid ${accent.top}30` }}>
                           featured
-                        </Badge>
+                        </span>
                       )}
                     </div>
-                    {ghStats !== null && (
-                      <div className="flex items-center gap-2.5 flex-shrink-0">
-                        <span className="text-xs text-muted-foreground flex items-center gap-1">
-                          <svg viewBox="0 0 16 16" width="12" height="12" fill="currentColor" className="text-amber-400">
-                            <path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z" />
-                          </svg>
-                          {ghStats.stars}
-                        </span>
-                        {ghStats.forks > 0 && (
-                          <span className="text-xs text-muted-foreground flex items-center gap-1">
-                            <svg viewBox="0 0 16 16" width="12" height="12" fill="currentColor" className="text-muted-foreground">
-                              <path d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z" />
-                            </svg>
-                            {ghStats.forks}
-                          </span>
-                        )}
-                      </div>
-                    )}
                   </div>
 
-                  {/* Docker pulls badge for MLCore */}
+                  {/* Stars + forks */}
+                  {gh && (
+                    <div className="flex items-center gap-2.5 flex-shrink-0 text-xs text-muted-foreground">
+                      {gh.stars > 0 && (
+                        <span className="flex items-center gap-1">
+                          <svg viewBox="0 0 16 16" width="11" height="11" fill="#f59e0b"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z" /></svg>
+                          {gh.stars}
+                        </span>
+                      )}
+                      {gh.forks > 0 && (
+                        <span className="flex items-center gap-1">
+                          <svg viewBox="0 0 16 16" width="11" height="11" fill="currentColor"><path d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z" /></svg>
+                          {gh.forks}
+                        </span>
+                      )}
+                    </div>
+                  )}
+                </div>
+
+                {/* Category + language row */}
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className={`text-[10px] px-2 py-0.5 rounded-full border font-medium ${accent.badge}`}>
+                    {project.category}
+                  </span>
+                  {gh?.language && langDot[gh.language] && (
+                    <span className="flex items-center gap-1 text-[10px] text-muted-foreground">
+                      <span className="w-2 h-2 rounded-full" style={{ backgroundColor: langDot[gh.language] }} />
+                      {gh.language}
+                    </span>
+                  )}
                   {project.showDockerPulls && dockerPulls !== null && (
-                    <span className="text-xs text-muted-foreground flex items-center gap-1">
-                      <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" className="text-blue-400">
-                        <path d="M13.983 11.078h2.119a.186.186 0 0 0 .186-.185V9.006a.186.186 0 0 0-.186-.186h-2.119a.185.185 0 0 0-.185.185v1.888c0 .102.083.185.185.185m-2.954-5.43h2.118a.186.186 0 0 0 .186-.186V3.574a.186.186 0 0 0-.186-.185h-2.118a.185.185 0 0 0-.185.185v1.888c0 .102.082.185.185.185m0 2.716h2.118a.187.187 0 0 0 .186-.186V6.29a.186.186 0 0 0-.186-.185h-2.118a.185.185 0 0 0-.185.185v1.887c0 .102.082.185.185.186m-2.93 0h2.12a.186.186 0 0 0 .184-.186V6.29a.185.185 0 0 0-.185-.185H8.1a.185.185 0 0 0-.185.185v1.887c0 .102.083.185.185.186m-2.964 0h2.119a.186.186 0 0 0 .185-.186V6.29a.185.185 0 0 0-.185-.185H5.136a.186.186 0 0 0-.186.185v1.887c0 .102.084.185.186.186m5.893 2.715h2.118a.186.186 0 0 0 .186-.185V9.006a.186.186 0 0 0-.186-.186h-2.118a.185.185 0 0 0-.185.185v1.888c0 .102.082.185.185.185m-2.93 0h2.12a.185.185 0 0 0 .184-.185V9.006a.185.185 0 0 0-.184-.186h-2.12a.185.185 0 0 0-.184.185v1.888c0 .102.083.185.185.185m-2.964 0h2.119a.185.185 0 0 0 .185-.185V9.006a.185.185 0 0 0-.184-.186h-2.12a.186.186 0 0 0-.186.185v1.888c0 .102.084.185.186.185m-2.92 0h2.12a.186.186 0 0 0 .184-.185V9.006a.185.185 0 0 0-.184-.186h-2.12a.185.185 0 0 0-.184.185v1.888c0 .102.082.185.185.185M23.763 9.89c-.065-.051-.672-.51-1.954-.51-.338.001-.676.03-1.01.087-.248-1.7-1.653-2.53-1.716-2.566l-.344-.199-.226.327c-.284.438-.49.922-.612 1.43-.23.97-.09 1.882.403 2.661-.595.332-1.55.413-1.744.42H.751a.751.751 0 0 0-.75.748 11.376 11.376 0 0 0 .692 4.062c.545 1.428 1.355 2.48 2.41 3.124 1.18.723 3.1 1.137 5.275 1.137.983.003 1.963-.086 2.93-.266a12.248 12.248 0 0 0 3.823-1.389c.98-.567 1.86-1.288 2.61-2.136 1.252-1.418 1.998-2.997 2.553-4.4h.221c1.372 0 2.215-.549 2.68-1.009.309-.293.55-.65.707-1.046l.098-.288Z"/>
-                      </svg>
+                    <span className="flex items-center gap-1 text-[10px] text-blue-400">
+                      <svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor"><path d="M13.983 11.078h2.119a.186.186 0 0 0 .186-.185V9.006a.186.186 0 0 0-.186-.186h-2.119a.185.185 0 0 0-.185.185v1.888c0 .102.083.185.185.185m-2.954-5.43h2.118a.186.186 0 0 0 .186-.186V3.574a.186.186 0 0 0-.186-.185h-2.118a.185.185 0 0 0-.185.185v1.888c0 .102.082.185.185.185m0 2.716h2.118a.187.187 0 0 0 .186-.186V6.29a.186.186 0 0 0-.186-.185h-2.118a.185.185 0 0 0-.185.185v1.887c0 .102.082.185.185.186m-2.93 0h2.12a.186.186 0 0 0 .184-.186V6.29a.185.185 0 0 0-.185-.185H8.1a.185.185 0 0 0-.185.185v1.887c0 .102.083.185.185.186m-2.964 0h2.119a.186.186 0 0 0 .185-.186V6.29a.185.185 0 0 0-.185-.185H5.136a.186.186 0 0 0-.186.185v1.887c0 .102.084.185.186.186m5.893 2.715h2.118a.186.186 0 0 0 .186-.185V9.006a.186.186 0 0 0-.186-.186h-2.118a.185.185 0 0 0-.185.185v1.888c0 .102.082.185.185.185m-2.93 0h2.12a.185.185 0 0 0 .184-.185V9.006a.185.185 0 0 0-.184-.186h-2.12a.185.185 0 0 0-.184.185v1.888c0 .102.083.185.185.185m-2.964 0h2.119a.185.185 0 0 0 .185-.185V9.006a.185.185 0 0 0-.184-.186h-2.12a.186.186 0 0 0-.186.185v1.888c0 .102.084.185.186.185m-2.92 0h2.12a.186.186 0 0 0 .184-.185V9.006a.185.185 0 0 0-.184-.186h-2.12a.185.185 0 0 0-.184.185v1.888c0 .102.082.185.185.185M23.763 9.89c-.065-.051-.672-.51-1.954-.51-.338.001-.676.03-1.01.087-.248-1.7-1.653-2.53-1.716-2.566l-.344-.199-.226.327c-.284.438-.49.922-.612 1.43-.23.97-.09 1.882.403 2.661-.595.332-1.55.413-1.744.42H.751a.751.751 0 0 0-.75.748 11.376 11.376 0 0 0 .692 4.062c.545 1.428 1.355 2.48 2.41 3.124 1.18.723 3.1 1.137 5.275 1.137.983.003 1.963-.086 2.93-.266a12.248 12.248 0 0 0 3.823-1.389c.98-.567 1.86-1.288 2.61-2.136 1.252-1.418 1.998-2.997 2.553-4.4h.221c1.372 0 2.215-.549 2.68-1.009.309-.293.55-.65.707-1.046l.098-.288Z"/></svg>
                       {dockerPulls.toLocaleString()} pulls
                     </span>
                   )}
+                </div>
 
-                  {/* Category badge */}
-                  <Badge
-                    variant="outline"
-                    className={`text-[10px] w-fit ${categoryColor[project.category] ?? ""}`}
-                  >
-                    {project.category}
-                  </Badge>
+                {/* Description */}
+                <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2 flex-1">
+                  {project.description}
+                </p>
 
-                  {/* Description */}
-                  <p className="text-sm text-muted-foreground leading-relaxed flex-1">
-                    {project.description}
-                  </p>
+                {/* Tags */}
+                <div className="flex flex-wrap gap-1">
+                  {project.tags.slice(0, 4).map((tag) => (
+                    <span key={tag}
+                      className="text-[10px] px-2 py-0.5 rounded-full bg-secondary text-muted-foreground border border-border">
+                      {tag}
+                    </span>
+                  ))}
+                  {project.tags.length > 4 && (
+                    <span className="text-[10px] px-2 py-0.5 rounded-full text-muted-foreground/50">
+                      +{project.tags.length - 4}
+                    </span>
+                  )}
+                </div>
 
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-1">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="text-[10px] px-2 py-0.5 rounded-full bg-secondary text-muted-foreground border border-border"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
+                <Separator className="mt-auto" />
 
-                  {/* Actions */}
-                  <div className="flex gap-2 pt-1">
-                    {project.githubUrl && (
-                      <Button size="sm" variant="outline" className="h-7 text-xs flex-1" asChild>
-                        <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-                          Source
-                        </a>
-                      </Button>
-                    )}
-                    {project.liveUrl && project.liveUrl !== project.githubUrl && (
-                      <Button size="sm" className="h-7 text-xs flex-1" asChild>
-                        <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-                          {project.liveLabel ?? (project.category === "OSS" ? "PRs" : "Live")}
-                        </a>
-                      </Button>
-                    )}
-                  </div>
-                </CardContent>
-              </Card>
+                {/* Action buttons */}
+                <div className="flex gap-2 pt-0.5">
+                  {project.githubUrl && (
+                    <a href={project.githubUrl} target="_blank" rel="noopener noreferrer"
+                      className="flex-1 flex items-center justify-center gap-1.5 text-xs font-medium py-1.5 px-3 rounded-md border border-border text-muted-foreground hover:text-foreground hover:border-muted-foreground transition-all">
+                      <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor">
+                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+                      </svg>
+                      Source
+                    </a>
+                  )}
+                  {project.liveUrl && project.liveUrl !== project.githubUrl && (
+                    <a href={project.liveUrl} target="_blank" rel="noopener noreferrer"
+                      className="flex-1 flex items-center justify-center gap-1.5 text-xs font-medium py-1.5 px-3 rounded-md transition-all"
+                      style={{ background: accent.top, color: "#fff" }}
+                      onMouseEnter={e => (e.currentTarget.style.opacity = "0.88")}
+                      onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
+                    >
+                      {project.liveLabel ?? (project.category === "OSS" ? "PRs" : "Live")} ↗
+                    </a>
+                  )}
+                </div>
+              </div>
             </motion.div>
           );
         })}
