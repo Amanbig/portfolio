@@ -236,7 +236,7 @@ export default function ProjectShowcase() {
     <section id="projects" className="scroll-mt-20">
       {/* Header */}
       <motion.div
-        initial={{ opacity: 0, y: 16 }}
+        initial={{ opacity: 0, y: 8 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}

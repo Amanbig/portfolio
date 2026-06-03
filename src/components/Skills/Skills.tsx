@@ -198,7 +198,7 @@ export default function Skills() {
     <section id="skills" className="scroll-mt-20">
       {/* Header */}
       <motion.div
-        initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, y: 8 }} whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }} transition={{ duration: 0.5 }} className="mb-10"
       >
         <p className="text-primary text-sm font-mono uppercase tracking-widest mb-2">Skills</p>
@@ -225,7 +225,7 @@ export default function Skills() {
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 mb-6">
         {/* Skill group cards — 2×2 */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 8 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
           className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 gap-4"
         >
@@ -260,7 +260,7 @@ export default function Skills() {
 
         {/* Language chart */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 8 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }}
           className="lg:col-span-2 rounded-xl border border-border bg-card p-5 flex flex-col"
         >
@@ -334,7 +334,7 @@ export default function Skills() {
 
       {/* Contribution heatmap */}
       <motion.div
-        initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, y: 8 }} whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.3 }}
         className="rounded-xl border border-border bg-card p-5"
       >

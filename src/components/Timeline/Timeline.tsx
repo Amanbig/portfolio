@@ -89,7 +89,7 @@ export default function Timeline() {
   return (
     <section id="timeline" className="scroll-mt-20">
       <motion.div
-        initial={{ opacity: 0, y: 16 }}
+        initial={{ opacity: 0, y: 8 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
