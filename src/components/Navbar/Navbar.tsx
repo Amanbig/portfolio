@@ -1,74 +1,122 @@
 "use client";
 import { useState, useEffect } from "react";
+import { motion } from "motion/react";
+import { Button } from "@/components/ui/button";
+
+const links = [
+  { href: "#about", label: "About" },
+  { href: "#skills", label: "Skills" },
+  { href: "#projects", label: "Projects" },
+  { href: "#timeline", label: "Experience" },
+  { href: "#contact", label: "Contact" },
+];
 
 export default function Navbar() {
-  const [activeTab, setActiveTab] = useState("#about");
+  const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  const navLinks = [
-    { href: "#about", label: "README.md", icon: "📝" },
-    { href: "#skills", label: "package.json", icon: "📦" },
-    { href: "#projects", label: "projects.tsx", icon: "⚛️" },
-    { href: "#services", label: "extensions.json", icon: "🧩" },
-    { href: "#timeline", label: "git-log", icon: "🕒" },
-    { href: "#contact", label: "contact.sh", icon: "💻" }
-  ];
-
-  // Scroll-aware active tab tracking
   useEffect(() => {
-    const sections = navLinks.map(link => link.href.replace("#", ""));
-    const observers: IntersectionObserver[] = [];
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
-    sections.forEach(id => {
-      const el = document.getElementById(id);
+  useEffect(() => {
+    const observers: IntersectionObserver[] = [];
+    links.forEach(({ href }) => {
+      const el = document.getElementById(href.slice(1));
       if (!el) return;
       const obs = new IntersectionObserver(
-        (entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              setActiveTab(`#${id}`);
-            }
-          });
-        },
+        (entries) =>
+          entries.forEach((e) => { if (e.isIntersecting) setActiveSection(href.slice(1)); }),
         { rootMargin: "-40% 0px -55% 0px" }
       );
       obs.observe(el);
       observers.push(obs);
     });
-
-    return () => observers.forEach(obs => obs.disconnect());
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    return () => observers.forEach((o) => o.disconnect());
   }, []);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-30 bg-[#161b22] border-b border-[#30363d] font-mono text-sm">
-      {/* Tab overflow fade edges on mobile */}
-      <div className="relative">
-        <div className="absolute left-0 top-0 bottom-0 w-6 bg-gradient-to-r from-[#161b22] to-transparent z-10 pointer-events-none md:hidden" />
-        <div className="absolute right-0 top-0 bottom-0 w-6 bg-gradient-to-l from-[#161b22] to-transparent z-10 pointer-events-none md:hidden" />
-        <div className="flex overflow-x-auto scrollbar-none" style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
-          {navLinks.map((link) => (
+    <motion.header
+      initial={{ y: -60, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-background/80 backdrop-blur-xl border-b border-border shadow-sm"
+          : "bg-transparent"
+      }`}
+    >
+      <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+        {/* Logo */}
+        <a href="#" className="flex items-center gap-2.5 group">
+          <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-xs font-bold text-primary-foreground">
+            AS
+          </div>
+          <span className="font-semibold text-foreground hidden sm:block tracking-tight">
+            Amanpreet Singh
+          </span>
+        </a>
+
+        {/* Desktop nav */}
+        <nav className="hidden md:flex items-center gap-1">
+          {links.map(({ href, label }) => (
             <a
-              key={link.href}
-              href={link.href}
-              onClick={() => setActiveTab(link.href)}
-              className={`flex items-center gap-2 px-4 py-2 border-r border-[#30363d] min-w-fit transition-all duration-200 relative ${
-                activeTab === link.href
-                  ? "bg-[#0d1117] text-[#c9d1d9] border-t-2 border-t-[#f78166]"
-                  : "bg-[#21262d] text-[#8b949e] hover:bg-[#1c2128] hover:text-[#c9d1d9]"
+              key={href}
+              href={href}
+              className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+                activeSection === href.slice(1)
+                  ? "text-foreground bg-accent"
+                  : "text-muted-foreground hover:text-foreground hover:bg-accent/60"
               }`}
             >
-              <span>{link.icon}</span>
-              <span className="whitespace-nowrap">{link.label}</span>
-              {activeTab === link.href && (
-                <span
-                  className="ml-1 text-[#8b949e] hover:text-white hover:bg-[#30363d] rounded-sm px-0.5 cursor-pointer"
-                  onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}
-                >×</span>
-              )}
+              {label}
             </a>
           ))}
+        </nav>
+
+        <div className="flex items-center gap-2">
+          <Button size="sm" className="hidden md:inline-flex" asChild>
+            <a href="/resume/Amanpreet_s_Resume.pdf" target="_blank" rel="noopener noreferrer">
+              Resume
+            </a>
+          </Button>
+
+          {/* Mobile hamburger */}
+          <button
+            className="md:hidden p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/60 transition-colors"
+            onClick={() => setMenuOpen((v) => !v)}
+            aria-label="Toggle menu"
+          >
+            <span className="block w-4 h-0.5 bg-current mb-1 transition-all" />
+            <span className="block w-4 h-0.5 bg-current mb-1 transition-all" />
+            <span className="block w-4 h-0.5 bg-current transition-all" />
+          </button>
         </div>
       </div>
-    </nav>
+
+      {/* Mobile menu */}
+      {menuOpen && (
+        <div className="md:hidden bg-background/95 backdrop-blur-xl border-b border-border px-4 pb-4">
+          {links.map(({ href, label }) => (
+            <a
+              key={href}
+              href={href}
+              onClick={() => setMenuOpen(false)}
+              className="block py-2.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              {label}
+            </a>
+          ))}
+          <Button size="sm" className="mt-3 w-full" asChild>
+            <a href="/resume/Amanpreet_s_Resume.pdf" target="_blank" rel="noopener noreferrer">
+              Resume
+            </a>
+          </Button>
+        </div>
+      )}
+    </motion.header>
   );
 }

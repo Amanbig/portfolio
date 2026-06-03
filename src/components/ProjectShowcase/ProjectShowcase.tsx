@@ -1,301 +1,341 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "motion/react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
 interface Project {
   id: string;
   title: string;
+  repoName: string;
   description: string;
   category: string;
   tags: string[];
-  image: string;
   liveUrl?: string;
   githubUrl?: string;
   featured: boolean;
-  date: string;
-  permissions: string;
+  showDockerPulls?: boolean;
+  liveLabel?: string;
+}
+
+interface GithubRepo {
+  name: string;
+  stars: number;
+  forks: number;
+  language: string | null;
 }
 
 const projects: Project[] = [
   {
-    id: "1",
-    title: "chatme",
-    description: "Agent-driven AI desktop app with voice & cross-platform support",
-    category: "Desktop",
-    tags: ["rust", "react", "tauri", "agents", "voice"],
-    image: "/projects/chatme.png",
-    liveUrl: "https://github.com/Amanbig/ChatMe/releases",
-    githubUrl: "https://github.com/Amanbig/ChatMe",
+    id: "0",
+    title: "DevOrch",
+    repoName: "DevOrch",
+    description:
+      "Terminal-native multi-provider AI coding assistant — plans, executes, and tracks dev tasks. Like Claude Code but open-source.",
+    category: "AI/ML",
+    tags: ["Python", "CLI", "Agents", "OpenAI", "Ollama"],
+    liveUrl: "https://pypi.org/project/devorch/",
+    githubUrl: "https://github.com/Amanbig/DevOrch",
     featured: true,
-    date: "Oct 24 10:00",
-    permissions: "-rwxr-xr-x"
-  },
-  {
-    id: "2",
-    title: "nextpy",
-    description: "CLI for NextJS + FastAPI apps",
-    category: "Web",
-    tags: ["cli", "python", "node"],
-    image: "/projects/nextpy.png",
-    liveUrl: "https://www.npmjs.com/package/create-nextpy-app",
-    githubUrl: "https://github.com/Amanbig/create-nextpy-app",
-    featured: true,
-    date: "Sep 15 14:30",
-    permissions: "-rwxr--r--"
-  },
-  {
-    id: "3",
-    title: "fileex",
-    description: "Modern file explorer with shadcn/ui",
-    category: "Desktop",
-    tags: ["rust", "tauri", "ui"],
-    image: "/projects/fileex.png",
-    liveUrl: "https://github.com/Amanbig/fileEx/releases/",
-    githubUrl: "https://github.com/Amanbig/fileEx",
-    featured: true,
-    date: "Aug 05 09:15",
-    permissions: "-rw-r--r--"
-  },
-  {
-    id: "4",
-    title: "backtool",
-    description: "Node.js backend generator CLI with multi-DB & visual UI",
-    category: "Web",
-    tags: ["node", "cli", "backend", "mongodb", "postgres"],
-    image: "/projects/backtool.png",
-    liveUrl: "https://www.npmjs.com/package/backtool",
-    githubUrl: "https://github.com/Amanbig/backTool",
-    featured: true,
-    date: "Jul 20 16:45",
-    permissions: "-rwxr-xr-x"
+    liveLabel: "PyPI",
   },
   {
     id: "5",
-    title: "mlcore",
-    description: "Self-hosted ML platform — upload datasets, train & monitor models",
+    title: "MLCore",
+    repoName: "MLCore",
+    description: "Self-hosted ML platform — upload datasets, train & monitor models.",
     category: "AI/ML",
-    tags: ["python", "fastapi", "grafana", "ml", "docker"],
-    image: "/projects/mlcore.png",
-    liveUrl: "https://github.com/Amanbig/MLCore",
+    tags: ["Python", "FastAPI", "Grafana", "Docker"],
+    liveUrl: "https://hub.docker.com/r/procoder588/mlcore",
     githubUrl: "https://github.com/Amanbig/MLCore",
     featured: true,
-    date: "Mar 10 10:30",
-    permissions: "-rwxr-xr-x"
+    showDockerPulls: true,
+    liveLabel: "Docker Hub",
   },
   {
     id: "6",
-    title: "runapi",
-    description: "File-based routing framework for FastAPI (Next.js style)",
+    title: "RunAPI",
+    repoName: "runapi",
+    description: "File-based routing framework for FastAPI (Next.js style).",
     category: "Web",
-    tags: ["python", "fastapi", "framework", "pypi"],
-    image: "/projects/runapi.png",
+    tags: ["Python", "FastAPI", "Framework", "PyPI"],
     liveUrl: "https://pypi.org/project/runapi/",
     githubUrl: "https://github.com/Amanbig/runapi",
     featured: true,
-    date: "Nov 12 11:00",
-    permissions: "-rwxr-xr-x"
+  },
+  {
+    id: "1",
+    title: "ChatMe",
+    repoName: "ChatMe",
+    description: "Agent-driven AI desktop app with voice & cross-platform support.",
+    category: "Desktop",
+    tags: ["Rust", "Tauri", "React", "AI"],
+    liveUrl: "https://github.com/Amanbig/ChatMe/releases",
+    githubUrl: "https://github.com/Amanbig/ChatMe",
+    featured: true,
+  },
+  {
+    id: "2",
+    title: "NextPy",
+    repoName: "create-nextpy-app",
+    description: "CLI scaffold for Next.js + FastAPI full-stack apps.",
+    category: "Web",
+    tags: ["CLI", "Python", "Node.js"],
+    liveUrl: "https://www.npmjs.com/package/create-nextpy-app",
+    githubUrl: "https://github.com/Amanbig/create-nextpy-app",
+    featured: true,
+  },
+  {
+    id: "3",
+    title: "FileEx",
+    repoName: "fileEx",
+    description: "Modern file explorer built with Rust, Tauri & shadcn/ui.",
+    category: "Desktop",
+    tags: ["Rust", "Tauri", "UI"],
+    liveUrl: "https://github.com/Amanbig/fileEx/releases/",
+    githubUrl: "https://github.com/Amanbig/fileEx",
+    featured: true,
+  },
+  {
+    id: "4",
+    title: "BackTool",
+    repoName: "backTool",
+    description: "Node.js backend generator CLI with multi-DB & visual UI.",
+    category: "Web",
+    tags: ["Node.js", "CLI", "MongoDB", "Postgres"],
+    liveUrl: "https://www.npmjs.com/package/backtool",
+    githubUrl: "https://github.com/Amanbig/backTool",
+    featured: true,
   },
   {
     id: "7",
-    title: "gem-ai",
-    description: "Creative content generator app",
-    category: "Mobile",
-    tags: ["flutter", "dart", "gemini"],
-    image: "/projects/dashboard.jpg",
-    liveUrl: "https://github.com/Amanbig/Gemini_app",
-    githubUrl: "https://github.com/Amanbig/Gemini_app",
+    title: "FileShare",
+    repoName: "FileShare",
+    description: "Secure file sharing platform built with Next.js & Appwrite.",
+    category: "Web",
+    tags: ["Next.js", "NestJS", "Appwrite"],
+    liveUrl: "https://file-share-three-mu.vercel.app/",
+    githubUrl: "https://github.com/Amanbig/FileShare",
     featured: false,
-    date: "Feb 14 12:00",
-    permissions: "-rwxr-xr-x"
   },
   {
     id: "8",
-    title: "fileshare",
-    description: "Secure file sharing platform",
+    title: "Music Level",
+    repoName: "music_level",
+    description: "AI-powered music generation & streaming platform.",
     category: "Web",
-    tags: ["nextjs", "nestjs", "appwrite"],
-    image: "/projects/fileshare.png",
-    liveUrl: "https://file-share-three-mu.vercel.app/",
-    githubUrl: "https://github.com/Amanbig/FileShare",
-    featured: true,
-    date: "Jan 20 09:30",
-    permissions: "-rwxr-xr-x"
+    tags: ["Next.js", "NestJS", "Gemini"],
+    liveUrl: "https://music-level.vercel.app/",
+    githubUrl: "https://github.com/Amanbig/music_level",
+    featured: false,
   },
   {
     id: "9",
-    title: "music-level",
-    description: "AI-powered music generation",
-    category: "Web",
-    tags: ["nextjs", "nestjs", "gemini"],
-    image: "/projects/music-level.png",
-    liveUrl: "https://music-level.vercel.app/",
-    githubUrl: "https://github.com/Amanbig/music_level",
-    featured: true,
-    date: "Dec 05 16:20",
-    permissions: "-rwxr-xr-x"
-  },
-  // OSS Contributions
-  {
-    id: "10",
-    title: "haystack",
-    description: "Contrib: JSON parsing refactor, pipeline deprecation & docs",
+    title: "Haystack (OSS)",
+    repoName: "haystack",
+    description: "Contrib: JSON parsing refactor, pipeline deprecation & docs.",
     category: "OSS",
-    tags: ["python", "oss", "deepset", "llm", "ai"],
-    image: "/projects/haystack.png",
-    liveUrl: "https://github.com/deepset-ai/haystack/pulls?q=is%3Apr+author%3AAmanbig",
+    tags: ["Python", "LLM", "AI"],
+    liveUrl:
+      "https://github.com/deepset-ai/haystack/pulls?q=is%3Apr+author%3AAmanbig",
     githubUrl: "https://github.com/deepset-ai/haystack",
     featured: true,
-    date: "Feb 20 09:00",
-    permissions: "drwxr-xr-x"
   },
   {
-    id: "11",
-    title: "haystack-integrations",
-    description: "Contrib: MongoDB Atlas metadata exploration methods",
+    id: "10",
+    title: "Haystack Integrations (OSS)",
+    repoName: "haystack-core-integrations",
+    description: "Contrib: MongoDB Atlas metadata exploration methods.",
     category: "OSS",
-    tags: ["python", "mongodb", "oss", "deepset", "atlas"],
-    image: "/projects/haystack.png",
-    liveUrl: "https://github.com/deepset-ai/haystack-core-integrations/pulls?q=is%3Apr+author%3AAmanbig",
+    tags: ["Python", "MongoDB", "Atlas"],
+    liveUrl:
+      "https://github.com/deepset-ai/haystack-core-integrations/pulls?q=is%3Apr+author%3AAmanbig",
     githubUrl: "https://github.com/deepset-ai/haystack-core-integrations",
     featured: true,
-    date: "Jan 15 14:00",
-    permissions: "drwxr-xr-x"
   },
 ];
 
-const categories = ["All", "Web", "Desktop", "Mobile", "AI/ML", "OSS"];
+const categories = ["All", "Web", "Desktop", "AI/ML", "OSS"];
+
+const categoryColor: Record<string, string> = {
+  Web: "bg-blue-500/10 text-blue-400 border-blue-500/20",
+  Desktop: "bg-purple-500/10 text-purple-400 border-purple-500/20",
+  "AI/ML": "bg-green-500/10 text-green-400 border-green-500/20",
+  OSS: "bg-amber-500/10 text-amber-400 border-amber-500/20",
+  Mobile: "bg-cyan-500/10 text-cyan-400 border-cyan-500/20",
+};
 
 export default function ProjectShowcase() {
-  const [activeCategory, setActiveCategory] = useState("All");
+  const [active, setActive] = useState("All");
+  const [githubData, setGithubData] = useState<Record<string, GithubRepo>>({});
+  const [dockerPulls, setDockerPulls] = useState<number | null>(null);
 
-  const filteredProjects = activeCategory === "All"
-    ? projects
-    : projects.filter(project => project.category === activeCategory);
+  useEffect(() => {
+    fetch("/api/github/repos")
+      .then((r) => r.json())
+      .then((data: { repos: GithubRepo[] }) => {
+        const map: Record<string, GithubRepo> = {};
+        data.repos.forEach((r) => { map[r.name.toLowerCase()] = r; });
+        setGithubData(map);
+      })
+      .catch(() => {});
+
+    fetch("/api/docker")
+      .then((r) => r.json())
+      .then((data: { pulls: number | null }) => {
+        if (data.pulls !== null) setDockerPulls(data.pulls);
+      })
+      .catch(() => {});
+  }, []);
+
+  const filtered =
+    active === "All" ? projects : projects.filter((p) => p.category === active);
+
+  const getStats = (repo: string) => {
+    const d = githubData[repo.toLowerCase()];
+    return d ? { stars: d.stars, forks: d.forks } : null;
+  };
 
   return (
-    <section id="projects" className="py-20 max-w-6xl mx-auto w-full px-4 font-mono">
-      <div className="bg-[#0d1117] border border-[#30363d] rounded-lg overflow-hidden shadow-xl">
-        {/* Terminal Header */}
-        <div className="bg-[#161b22] px-4 py-2.5 border-b border-[#30363d] flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="text-[#8b949e] text-xs">projects-list</span>
-          </div>
-          <div className="flex items-center gap-3 text-[#8b949e] text-xs">
-            <span>Total: {projects.length}</span>
-            <span>zsh</span>
-          </div>
-        </div>
+    <section id="projects" className="scroll-mt-20">
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+        className="mb-12"
+      >
+        <p className="text-primary text-sm font-mono uppercase tracking-widest mb-2">Projects</p>
+        <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">Things I&apos;ve Built</h2>
+        <p className="text-muted-foreground mt-3 text-sm">
+          {projects.length} projects — solo tools, OSS contributions, and AI systems.
+        </p>
+      </motion.div>
 
-        <div className="p-6 md:p-10">
-          {/* Command Input */}
-          <div className="mb-6 text-[#c9d1d9] text-sm md:text-base">
-            <span className="text-green-400">➜</span> <span className="text-blue-400">~</span> cd projects && ls -la
-          </div>
+      {/* Category filter */}
+      <div className="flex flex-wrap gap-2 mb-8">
+        {categories.map((cat) => (
+          <button
+            key={cat}
+            onClick={() => setActive(cat)}
+            className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-all ${
+              active === cat
+                ? "bg-primary text-primary-foreground border-primary"
+                : "border-border text-muted-foreground hover:text-foreground hover:border-border/80"
+            }`}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
 
-          {/* Category Filter */}
-          <div className="flex flex-wrap gap-2 mb-8">
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setActiveCategory(category)}
-                className={`flex items-center gap-1.5 px-3 py-1 rounded text-xs transition-all border ${
-                  activeCategory === category
-                    ? category === "OSS"
-                      ? "bg-purple-500/15 text-purple-300 border-purple-500/40 font-bold"
-                      : "bg-blue-500/10 text-blue-400 border-blue-400/40 font-bold"
-                    : "text-[#8b949e] border-[#30363d] hover:border-[#484f58] hover:text-[#c9d1d9]"
-                }`}
-              >
-                <span>{category === "OSS" ? "🌐" : category === "All" ? "✦" : "📁"}</span>
-                {category}
-              </button>
-            ))}
-          </div>
+      {/* Project grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {filtered.map((project, i) => {
+          const ghStats = getStats(project.repoName);
+          return (
+            <motion.div
+              key={project.id}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.06, duration: 0.4 }}
+            >
+              <Card className="border-border h-full hover:bg-accent/30 transition-colors group">
+                <CardContent className="pt-5 pb-4 flex flex-col h-full gap-3">
+                  {/* Header row */}
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="font-semibold text-foreground text-sm leading-tight">
+                        {project.title}
+                      </span>
+                      {project.featured && (
+                        <Badge
+                          variant="outline"
+                          className="text-[10px] py-0 px-1.5 border-primary/30 text-primary"
+                        >
+                          featured
+                        </Badge>
+                      )}
+                    </div>
+                    {ghStats !== null && (
+                      <div className="flex items-center gap-2.5 flex-shrink-0">
+                        <span className="text-xs text-muted-foreground flex items-center gap-1">
+                          <svg viewBox="0 0 16 16" width="12" height="12" fill="currentColor" className="text-amber-400">
+                            <path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z" />
+                          </svg>
+                          {ghStats.stars}
+                        </span>
+                        {ghStats.forks > 0 && (
+                          <span className="text-xs text-muted-foreground flex items-center gap-1">
+                            <svg viewBox="0 0 16 16" width="12" height="12" fill="currentColor" className="text-muted-foreground">
+                              <path d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z" />
+                            </svg>
+                            {ghStats.forks}
+                          </span>
+                        )}
+                      </div>
+                    )}
+                  </div>
 
-          {/* File List */}
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs border-collapse">
-              <thead>
-                <tr className="text-[#484f58] border-b border-[#30363d]">
-                  <th className="pb-2 font-normal whitespace-nowrap pr-4">Permissions</th>
-                  <th className="pb-2 font-normal whitespace-nowrap pr-4">User</th>
-                  <th className="pb-2 font-normal whitespace-nowrap pr-4">Date</th>
-                  <th className="pb-2 font-normal pr-4">Name</th>
-                  <th className="pb-2 font-normal">Description</th>
-                  <th className="pb-2 font-normal text-right">Actions</th>
-                </tr>
-              </thead>
-              <tbody className="font-mono">
-                {filteredProjects.map((project, index) => (
-                  <motion.tr
-                    key={project.id}
-                    initial={{ opacity: 0, x: -10 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.04 }}
-                    className={`group transition-colors border-b border-[#30363d]/40 last:border-0 ${
-                      project.category === "OSS" ? "hover:bg-[#1a1030]" : "hover:bg-[#161b22]"
-                    }`}
+                  {/* Docker pulls badge for MLCore */}
+                  {project.showDockerPulls && dockerPulls !== null && (
+                    <span className="text-xs text-muted-foreground flex items-center gap-1">
+                      <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" className="text-blue-400">
+                        <path d="M13.983 11.078h2.119a.186.186 0 0 0 .186-.185V9.006a.186.186 0 0 0-.186-.186h-2.119a.185.185 0 0 0-.185.185v1.888c0 .102.083.185.185.185m-2.954-5.43h2.118a.186.186 0 0 0 .186-.186V3.574a.186.186 0 0 0-.186-.185h-2.118a.185.185 0 0 0-.185.185v1.888c0 .102.082.185.185.185m0 2.716h2.118a.187.187 0 0 0 .186-.186V6.29a.186.186 0 0 0-.186-.185h-2.118a.185.185 0 0 0-.185.185v1.887c0 .102.082.185.185.186m-2.93 0h2.12a.186.186 0 0 0 .184-.186V6.29a.185.185 0 0 0-.185-.185H8.1a.185.185 0 0 0-.185.185v1.887c0 .102.083.185.185.186m-2.964 0h2.119a.186.186 0 0 0 .185-.186V6.29a.185.185 0 0 0-.185-.185H5.136a.186.186 0 0 0-.186.185v1.887c0 .102.084.185.186.186m5.893 2.715h2.118a.186.186 0 0 0 .186-.185V9.006a.186.186 0 0 0-.186-.186h-2.118a.185.185 0 0 0-.185.185v1.888c0 .102.082.185.185.185m-2.93 0h2.12a.185.185 0 0 0 .184-.185V9.006a.185.185 0 0 0-.184-.186h-2.12a.185.185 0 0 0-.184.185v1.888c0 .102.083.185.185.185m-2.964 0h2.119a.185.185 0 0 0 .185-.185V9.006a.185.185 0 0 0-.184-.186h-2.12a.186.186 0 0 0-.186.185v1.888c0 .102.084.185.186.185m-2.92 0h2.12a.186.186 0 0 0 .184-.185V9.006a.185.185 0 0 0-.184-.186h-2.12a.185.185 0 0 0-.184.185v1.888c0 .102.082.185.185.185M23.763 9.89c-.065-.051-.672-.51-1.954-.51-.338.001-.676.03-1.01.087-.248-1.7-1.653-2.53-1.716-2.566l-.344-.199-.226.327c-.284.438-.49.922-.612 1.43-.23.97-.09 1.882.403 2.661-.595.332-1.55.413-1.744.42H.751a.751.751 0 0 0-.75.748 11.376 11.376 0 0 0 .692 4.062c.545 1.428 1.355 2.48 2.41 3.124 1.18.723 3.1 1.137 5.275 1.137.983.003 1.963-.086 2.93-.266a12.248 12.248 0 0 0 3.823-1.389c.98-.567 1.86-1.288 2.61-2.136 1.252-1.418 1.998-2.997 2.553-4.4h.221c1.372 0 2.215-.549 2.68-1.009.309-.293.55-.65.707-1.046l.098-.288Z"/>
+                      </svg>
+                      {dockerPulls.toLocaleString()} pulls
+                    </span>
+                  )}
+
+                  {/* Category badge */}
+                  <Badge
+                    variant="outline"
+                    className={`text-[10px] w-fit ${categoryColor[project.category] ?? ""}`}
                   >
-                    <td className={`py-3 whitespace-nowrap pr-6 font-mono text-[10px] ${project.category === "OSS" ? "text-purple-400/50" : "text-[#484f58]"}`}>
-                      {project.permissions}
-                    </td>
-                    <td className="py-3 text-[#e0af68] whitespace-nowrap pr-4">aman</td>
-                    <td className="py-3 text-[#484f58] whitespace-nowrap pr-6">{project.date}</td>
-                    <td className="py-3 pr-6 whitespace-nowrap">
-                      <div className="flex flex-col gap-1">
-                        <div className="flex items-center gap-1.5">
-                          {project.category === "OSS" ? (
-                            <span className="text-purple-400 font-bold group-hover:underline">{project.title}</span>
-                          ) : (
-                            <span className="text-blue-400 font-bold group-hover:underline">{project.title}</span>
-                          )}
-                          {project.featured && <span className="text-yellow-400">*</span>}
-                          {project.category === "OSS" && (
-                            <span className="text-[9px] px-1.5 py-0.5 rounded bg-purple-500/15 text-purple-300 border border-purple-500/30">
-                              contrib
-                            </span>
-                          )}
-                        </div>
-                        {/* Top 2 tag pills */}
-                        <div className="flex gap-1">
-                          {project.tags.slice(0, 2).map(tag => (
-                            <span key={tag} className="text-[9px] px-1.5 py-0.5 rounded bg-[#21262d] text-[#8b949e] border border-[#30363d]">{tag}</span>
-                          ))}
-                        </div>
-                      </div>
-                    </td>
-                    <td className="py-3 text-[#8b949e] pr-4 max-w-[240px]">
-                      <span className="block truncate" title={project.description}>{project.description}</span>
-                    </td>
-                    <td className="py-3 text-right whitespace-nowrap">
-                      <div className="flex justify-end gap-3 opacity-40 group-hover:opacity-100 transition-opacity">
-                        {project.liveUrl && (
-                          <a
-                            href={project.liveUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className={`hover:opacity-80 transition-opacity ${project.category === "OSS" ? "text-purple-400" : "text-green-400"}`}
-                          >
-                            {project.category === "OSS" ? "[prs]" : "[run]"}
-                          </a>
-                        )}
-                        {project.githubUrl && (
-                          <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="text-[#8b949e] hover:text-white">
-                            [src]
-                          </a>
-                        )}
-                      </div>
-                    </td>
-                  </motion.tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                    {project.category}
+                  </Badge>
 
-          <div className="mt-4 text-[#8b949e] text-sm">
-            Total: {filteredProjects.length} files found.
-          </div>
-        </div>
+                  {/* Description */}
+                  <p className="text-sm text-muted-foreground leading-relaxed flex-1">
+                    {project.description}
+                  </p>
+
+                  {/* Tags */}
+                  <div className="flex flex-wrap gap-1">
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-[10px] px-2 py-0.5 rounded-full bg-secondary text-muted-foreground border border-border"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Actions */}
+                  <div className="flex gap-2 pt-1">
+                    {project.githubUrl && (
+                      <Button size="sm" variant="outline" className="h-7 text-xs flex-1" asChild>
+                        <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                          Source
+                        </a>
+                      </Button>
+                    )}
+                    {project.liveUrl && project.liveUrl !== project.githubUrl && (
+                      <Button size="sm" className="h-7 text-xs flex-1" asChild>
+                        <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                          {project.liveLabel ?? (project.category === "OSS" ? "PRs" : "Live")}
+                        </a>
+                      </Button>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          );
+        })}
       </div>
     </section>
   );

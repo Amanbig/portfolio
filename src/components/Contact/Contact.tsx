@@ -1,10 +1,38 @@
 "use client";
-import React, { useState, ChangeEvent, FormEvent } from 'react';
-import { motion } from 'motion/react';
+import React, { useState, ChangeEvent, FormEvent } from "react";
+import { motion } from "motion/react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Card, CardContent } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+
+const socialLinks = [
+  {
+    label: "GitHub",
+    value: "github.com/Amanbig",
+    href: "https://github.com/Amanbig",
+  },
+  {
+    label: "LinkedIn",
+    value: "amanpreet-singh-9a1929211",
+    href: "https://www.linkedin.com/in/amanpreet-singh-9a1929211",
+  },
+  {
+    label: "Email",
+    value: "amanpreetsinghjhiwant@gmail.com",
+    href: "mailto:amanpreetsinghjhiwant7@gmail.com",
+  },
+  {
+    label: "Discord",
+    value: "phibi2662",
+    href: "#",
+  },
+];
 
 export default function Contact() {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [status, setStatus] = useState('');
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -12,181 +40,178 @@ export default function Contact() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setStatus('sending');
+    setStatus("sending");
     try {
-      const response = await fetch('https://formspree.io/f/mrbzpvel', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const res = await fetch("https://formspree.io/f/mrbzpvel", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
-      if (response.ok) {
-        setStatus('success');
-        setFormData({ name: '', email: '', message: '' });
+      if (res.ok) {
+        setStatus("success");
+        setFormData({ name: "", email: "", message: "" });
       } else {
-        setStatus('error');
+        setStatus("error");
       }
     } catch {
-      setStatus('error');
+      setStatus("error");
     }
   };
 
-  const socialLinks = [
-    {
-      icon: "⬡",
-      label: "github",
-      value: "github.com/Amanbig",
-      href: "https://github.com/Amanbig",
-      color: "text-[#c9d1d9] hover:text-white",
-    },
-    {
-      icon: "◈",
-      label: "linkedin",
-      value: "linkedin.com/in/amanpreet-singh-9a1929211",
-      href: "https://www.linkedin.com/in/amanpreet-singh-9a1929211",
-      color: "text-blue-400 hover:text-blue-300",
-    },
-    {
-      icon: "✉",
-      label: "email",
-      value: "amanpreetsinghjhiwant@gmail.com",
-      href: "mailto:amanpreetsinghjhiwant7@gmail.com",
-      color: "text-green-400 hover:text-green-300",
-    },
-    {
-      icon: "◉",
-      label: "discord",
-      value: "phibi2662",
-      href: "#",
-      color: "text-purple-400 hover:text-purple-300",
-    },
-  ];
-
   return (
-    <section id="contact" className="py-20 max-w-5xl mx-auto w-full px-4 font-mono">
-      <div className="bg-[#0d1117] border border-[#30363d] rounded-lg overflow-hidden shadow-xl">
-        <div className="bg-[#161b22] px-4 py-2.5 border-b border-[#30363d] flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full bg-[#ff5f56]" />
-          <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
-          <div className="w-3 h-3 rounded-full bg-[#27c93f]" />
-          <span className="text-[#8b949e] text-xs ml-2">contact_me.sh</span>
-        </div>
+    <section id="contact" className="scroll-mt-20">
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+        className="mb-12"
+      >
+        <p className="text-primary text-sm font-mono uppercase tracking-widest mb-2">Contact</p>
+        <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">Get In Touch</h2>
+        <p className="text-muted-foreground mt-3 text-sm max-w-lg">
+          Have a project in mind or just want to chat? I&apos;m always open to new opportunities and
+          conversations.
+        </p>
+      </motion.div>
 
-        <div className="flex flex-col md:flex-row">
-          {/* Left panel — social links */}
-          <div className="md:w-60 border-b md:border-b-0 md:border-r border-[#30363d] p-6 space-y-4">
-            <div className="text-[#8b949e] text-xs mb-4">
-              <span className="text-green-400">➜</span> <span className="text-blue-400">~</span> cat contacts.json
-            </div>
+      <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
+        {/* Contact info */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="md:col-span-2"
+        >
+          <Card className="border-border h-full">
+            <CardContent className="pt-5 space-y-5">
+              <div>
+                <h3 className="text-sm font-semibold text-foreground mb-4">Connect</h3>
+                <div className="space-y-4">
+                  {socialLinks.map(({ label, value, href }, i) => (
+                    <motion.a
+                      key={label}
+                      href={href}
+                      target={href !== "#" ? "_blank" : undefined}
+                      rel="noopener noreferrer"
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.06 }}
+                      className="flex flex-col gap-0.5 group"
+                    >
+                      <span className="text-xs font-medium text-muted-foreground">{label}</span>
+                      <span className="text-sm text-foreground group-hover:text-primary transition-colors truncate">
+                        {value}
+                      </span>
+                    </motion.a>
+                  ))}
+                </div>
+              </div>
 
-            <div className="space-y-3">
-              {socialLinks.map((link, i) => (
-                <motion.a
-                  key={link.label}
-                  href={link.href}
-                  target={link.href !== "#" ? "_blank" : undefined}
-                  rel="noopener noreferrer"
-                  initial={{ opacity: 0, x: -10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.08 }}
-                  className={`flex flex-col gap-0.5 group ${link.color} transition-colors`}
-                >
-                  <div className="flex items-center gap-2 text-xs">
-                    <span className="text-[#8b949e] group-hover:text-current transition-colors">{link.icon}</span>
-                    <span className="text-[#8b949e] group-hover:text-current transition-colors">{link.label}:</span>
-                  </div>
-                  <div className="text-[10px] pl-4 break-all leading-tight">{link.value}</div>
-                </motion.a>
-              ))}
-            </div>
+              <Separator />
 
-            <div className="pt-4 border-t border-[#30363d]">
-              <a href="/resume/Amanpreet_s_Resume.pdf" target="_blank" rel="noopener noreferrer"
-                className="text-xs text-[#8b949e] hover:text-white transition-colors flex items-center gap-1 group">
-                <span className="text-yellow-400 group-hover:animate-float inline-block">↓</span>
+              <a
+                href="/resume/Amanpreet_s_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors group"
+              >
+                <span className="text-primary group-hover:animate-float inline-block">↓</span>
                 Download Resume
               </a>
-            </div>
-          </div>
+            </CardContent>
+          </Card>
+        </motion.div>
 
-          {/* Right panel — form */}
-          <div className="flex-1 p-6 md:p-8">
-            <div className="mb-6 text-[#c9d1d9] text-sm">
-              <span className="text-green-400">➜</span> <span className="text-blue-400">~</span>{" "}
-              <span className="text-[#c9d1d9]">./contact_me.sh</span>
-            </div>
-
-            <form onSubmit={handleSubmit} className="space-y-5">
-              {[
-                { label: "Enter Name:", name: "name", type: "text", value: formData.name },
-                { label: "Enter Email:", name: "email", type: "email", value: formData.email },
-              ].map(({ label, name, type, value }) => (
-                <div key={name}>
-                  <label className="block text-[#8b949e] text-xs mb-1 tracking-wide">{label}</label>
-                  <div className="flex items-center bg-[#161b22] border border-[#30363d] rounded focus-within:border-blue-400/60 transition-colors">
-                    <span className="text-green-400 px-3 select-none">➜</span>
-                    <input
-                      type={type}
-                      name={name}
-                      value={value}
-                      onChange={handleChange}
-                      className="w-full bg-transparent text-[#c9d1d9] focus:outline-none py-2.5 pr-3 text-sm"
-                      placeholder="_"
-                      required
-                    />
-                  </div>
+        {/* Form */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+          className="md:col-span-3"
+        >
+          <Card className="border-border">
+            <CardContent className="pt-5">
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="space-y-1.5">
+                  <label htmlFor="name" className="text-xs font-medium text-muted-foreground">
+                    Name
+                  </label>
+                  <Input
+                    id="name"
+                    name="name"
+                    type="text"
+                    value={formData.name}
+                    onChange={handleChange}
+                    placeholder="Your name"
+                    required
+                    className="bg-background border-border focus-visible:ring-primary/50"
+                  />
                 </div>
-              ))}
 
-              <div>
-                <label className="block text-[#8b949e] text-xs mb-1 tracking-wide">Enter Message:</label>
-                <div className="flex items-start bg-[#161b22] border border-[#30363d] rounded focus-within:border-blue-400/60 transition-colors">
-                  <span className="text-green-400 px-3 pt-2.5 select-none">➜</span>
-                  <textarea
+                <div className="space-y-1.5">
+                  <label htmlFor="email" className="text-xs font-medium text-muted-foreground">
+                    Email
+                  </label>
+                  <Input
+                    id="email"
+                    name="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="your@email.com"
+                    required
+                    className="bg-background border-border focus-visible:ring-primary/50"
+                  />
+                </div>
+
+                <div className="space-y-1.5">
+                  <label htmlFor="message" className="text-xs font-medium text-muted-foreground">
+                    Message
+                  </label>
+                  <Textarea
+                    id="message"
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
-                    className="w-full bg-transparent text-[#c9d1d9] focus:outline-none py-2.5 pr-3 min-h-[110px] resize-none text-sm"
-                    placeholder="_"
+                    placeholder="What's on your mind?"
                     required
+                    rows={5}
+                    className="bg-background border-border focus-visible:ring-primary/50 resize-none"
                   />
                 </div>
-              </div>
 
-              <div className="flex items-center gap-4">
-                <button
-                  type="submit"
-                  disabled={status === 'sending'}
-                  className="flex items-center gap-2 bg-[#238636] text-white px-5 py-2 rounded text-sm font-bold hover:bg-[#2ea043] transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed border border-[#238636]/60 hover:border-[#2ea043]/60"
-                >
-                  {status === 'sending' ? (
-                    <><span className="animate-spin">⟳</span> Executing...</>
-                  ) : (
-                    <><span className="text-green-300">▶</span> ./submit.sh</>
+                <div className="flex items-center gap-4 pt-1">
+                  <Button type="submit" disabled={status === "sending"} className="flex-1 sm:flex-none">
+                    {status === "sending" ? "Sending..." : "Send Message"}
+                  </Button>
+
+                  {status === "success" && (
+                    <motion.span
+                      initial={{ opacity: 0, x: 10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      className="text-sm text-green-400 flex items-center gap-1.5"
+                    >
+                      <span>✓</span> Sent!
+                    </motion.span>
                   )}
-                </button>
-
-                {status === 'success' && (
-                  <motion.div
-                    initial={{ opacity: 0, x: 10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    className="text-green-400 flex items-center gap-1 text-sm"
-                  >
-                    <span>✔</span> Message sent!
-                  </motion.div>
-                )}
-                {status === 'error' && (
-                  <motion.div
-                    initial={{ opacity: 0, x: 10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    className="text-red-400 flex items-center gap-1 text-sm"
-                  >
-                    <span>✘</span> Failed to send.
-                  </motion.div>
-                )}
-              </div>
-            </form>
-          </div>
-        </div>
+                  {status === "error" && (
+                    <motion.span
+                      initial={{ opacity: 0, x: 10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      className="text-sm text-destructive"
+                    >
+                      Something went wrong.
+                    </motion.span>
+                  )}
+                </div>
+              </form>
+            </CardContent>
+          </Card>
+        </motion.div>
       </div>
     </section>
   );

@@ -1,167 +1,132 @@
 "use client";
-import { useState, useEffect } from "react";
-import { motion } from "motion/react";
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+
+const roles = [
+  "Backend Engineer",
+  "OSS Contributor",
+  "API Developer",
+  "Systems Builder",
+];
+
+const socialLinks = [
+  { label: "GitHub", href: "https://github.com/Amanbig" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/amanpreet-singh-9a1929211" },
+  { label: "Email", href: "mailto:amanpreetsinghjhiwant7@gmail.com" },
+];
 
 export default function Hero() {
-  const [text, setText] = useState("");
-  const [showNeo, setShowNeo] = useState(false);
-  const fullText = "> Initializing portfolio...\n> Loading kernel...\n> Mounting volumes...\n> Starting services...\n> Ready.";
+  const [roleIndex, setRoleIndex] = useState(0);
 
   useEffect(() => {
-    let i = 0;
-    const interval = setInterval(() => {
-      setText(fullText.slice(0, i));
-      i++;
-      if (i > fullText.length) {
-        clearInterval(interval);
-        setTimeout(() => setShowNeo(true), 500);
-      }
-    }, 25);
-    return () => clearInterval(interval);
+    const id = setInterval(() => {
+      setRoleIndex((i) => (i + 1) % roles.length);
+    }, 2600);
+    return () => clearInterval(id);
   }, []);
 
-  const colorSwatches = [
-    "bg-[#1c1c1c]", "bg-red-700", "bg-green-700", "bg-yellow-600",
-    "bg-blue-700", "bg-purple-700", "bg-cyan-600", "bg-gray-400",
-    "bg-gray-600", "bg-red-500", "bg-green-500", "bg-yellow-400",
-    "bg-blue-500", "bg-purple-500", "bg-cyan-400", "bg-white",
-  ];
-
   return (
-    <section className="min-h-screen flex items-center justify-center p-4 relative z-10 font-mono">
-      <div className="w-full max-w-5xl bg-[#0d1117] border border-[#30363d] rounded-lg shadow-2xl overflow-hidden glow-blue">
-        {/* Terminal Header */}
-        <div className="bg-[#161b22] px-4 py-2.5 border-b border-[#30363d] flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full bg-[#ff5f56] cursor-pointer hover:brightness-110 transition-all" />
-          <div className="w-3 h-3 rounded-full bg-[#ffbd2e] cursor-pointer hover:brightness-110 transition-all" />
-          <div className="w-3 h-3 rounded-full bg-[#27c93f] cursor-pointer hover:brightness-110 transition-all" />
-          <div className="ml-4 text-xs text-[#8b949e] flex-1 text-center tracking-wider">aman@portfolio:~</div>
-        </div>
+    <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
+      {/* Subtle grid */}
+      <div className="absolute inset-0 bg-grid opacity-20 pointer-events-none" />
 
-        {/* Terminal Content */}
-        <div className="p-6 md:p-10 text-[#c9d1d9] min-h-[520px] flex flex-col">
-          <div className="flex-1">
-            <pre className="whitespace-pre-wrap text-sm md:text-base leading-relaxed text-[#8b949e]">
-              {text}
-            </pre>
+      {/* Orb 1 — blue, top-right */}
+      <div
+        className="absolute -top-20 -right-20 w-[480px] h-[480px] rounded-full blur-3xl pointer-events-none animate-orb-1"
+        style={{ background: "radial-gradient(circle, oklch(0.60 0.18 241 / 18%), transparent 70%)" }}
+      />
+      {/* Orb 2 — purple, bottom-left */}
+      <div
+        className="absolute -bottom-32 -left-20 w-[520px] h-[520px] rounded-full blur-3xl pointer-events-none animate-orb-2"
+        style={{ background: "radial-gradient(circle, oklch(0.55 0.20 280 / 14%), transparent 70%)" }}
+      />
+      {/* Orb 3 — cyan, mid-left */}
+      <div
+        className="absolute top-1/2 -left-16 w-[320px] h-[320px] rounded-full blur-3xl pointer-events-none animate-orb-3"
+        style={{ background: "radial-gradient(circle, oklch(0.72 0.15 200 / 10%), transparent 70%)" }}
+      />
 
-            {showNeo && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5 }}
-                className="mt-6"
+      {/* Vignette fade */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-transparent to-background/80 pointer-events-none" />
+
+      <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="space-y-6"
+        >
+          <Badge variant="secondary" className="text-xs tracking-wide px-3 py-1">
+            Open to new opportunities
+          </Badge>
+
+          <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-none">
+            Hi, I&apos;m{" "}
+            <span className="bg-gradient-to-r from-primary via-blue-400 to-cyan-400 bg-clip-text text-transparent">
+              Amanpreet
+            </span>
+          </h1>
+
+          {/* Animated role */}
+          <div className="h-10 flex items-center justify-center overflow-hidden">
+            <AnimatePresence mode="wait">
+              <motion.p
+                key={roleIndex}
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -14 }}
+                transition={{ duration: 0.35 }}
+                className="text-2xl sm:text-3xl font-semibold text-muted-foreground"
               >
-                <div className="flex items-center gap-2 mb-6">
-                  <span className="text-green-400 text-glow-green">aman@portfolio:~$</span>
-                  <span className="text-[#c9d1d9]">neofetch</span>
-                </div>
-
-                <div className="flex flex-col md:flex-row gap-8 md:gap-14">
-                  {/* ASCII Art — richer person silhouette */}
-                  <div className="hidden md:block text-blue-400 font-bold whitespace-pre select-none leading-tight text-sm">
-{`   ╭───────────╮
-   │  ◉     ◉  │
-   │     ▿     │
-   │  ╰─────╯  │
-   ╰───────────╯
-    ╭─────────╮
-    │ ≡ ≡ ≡ ≡ │  AP
-    │ ≡ ≡ ≡ ≡ │
-    ╰─────────╯
-     │       │
-    ╭╯       ╰╮
-    ▔         ▔`}
-                  </div>
-
-                  {/* System Info */}
-                  <div className="space-y-1.5 text-sm md:text-base flex-1">
-                    <div className="text-blue-400 font-bold mb-2 text-lg">amanpreet@portfolio</div>
-                    <div className="border-t border-[#30363d] mb-3" />
-
-                    {[
-                      { label: "OS", value: "PortfolioOS v2.0 (Web)", color: "text-blue-400" },
-                      { label: "Host", value: "Vercel Edge Network", color: "text-blue-400" },
-                      { label: "Kernel", value: "Next.js 15 (Turbopack)", color: "text-blue-400" },
-                      { label: "Uptime", value: "Forever", color: "text-blue-400" },
-                      { label: "Shell", value: "Zsh + Oh My Zsh", color: "text-blue-400" },
-                      { label: "Packages", value: "npm (127), pip (43)", color: "text-blue-400" },
-                    ].map(({ label, value, color }) => (
-                      <div key={label} className="flex gap-3">
-                        <span className={`${color} font-bold min-w-[90px]`}>{label}</span>
-                        <span className="text-[#c9d1d9]">{value}</span>
-                      </div>
-                    ))}
-
-                    <div className="my-3 border-t border-[#30363d] max-w-[320px]" />
-
-                    {[
-                      { label: "User", value: "Amanpreet Singh", color: "text-green-400" },
-                      { label: "Role", value: "Backend Engineer & OSS contributor", color: "text-green-400" },
-                      { label: "CGPA", value: "8.0 / 10 — CSE, CCET", color: "text-green-400" },
-                    ].map(({ label, value, color }) => (
-                      <div key={label} className="flex gap-3">
-                        <span className={`${color} font-bold min-w-[90px]`}>{label}</span>
-                        <span className="text-[#c9d1d9]">{value}</span>
-                      </div>
-                    ))}
-
-                    <div className="my-3 border-t border-[#30363d] max-w-[320px]" />
-
-                    {/* Social Links */}
-                    <div className="flex flex-col gap-1.5">
-                      {[
-                        { label: "Github", href: "https://github.com/Amanbig", display: "github.com/Amanbig", color: "text-purple-400" },
-                        { label: "LinkedIn", href: "https://www.linkedin.com/in/amanpreet-singh-9a1929211", display: "linkedin.com/in/amanpreet-singh-9a1929211", color: "text-purple-400" },
-                        { label: "Email", href: "mailto:amanpreetsinghjhiwant7@gmail.com", display: "amanpreetsinghjhiwant@gmail.com", color: "text-purple-400" },
-                      ].map(({ label, href, display, color }) => (
-                        <div key={label} className="flex gap-3 items-center">
-                          <span className={`${color} font-bold min-w-[90px]`}>{label}</span>
-                          <a href={href} target="_blank" rel="noopener noreferrer"
-                            className="text-[#c9d1d9] hover:text-white hover:underline decoration-blue-400 underline-offset-4 transition-all truncate max-w-[220px]">
-                            {display}
-                          </a>
-                        </div>
-                      ))}
-                    </div>
-
-                    {/* Color swatches */}
-                    <div className="flex gap-1 mt-4 flex-wrap">
-                      {colorSwatches.map((c, i) => (
-                        <div key={i} className={`w-5 h-5 rounded-sm ${c}`} />
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Navigation Commands */}
-                <div className="mt-10 pt-5 border-t border-[#30363d]">
-                  <p className="text-[#8b949e] mb-3 text-xs tracking-widest uppercase">// Quick Navigation</p>
-                  <div className="flex flex-wrap gap-4 text-sm md:text-base">
-                    {[
-                      { href: "#projects", label: "view_projects()", color: "text-blue-400 hover:text-blue-300" },
-                      { href: "#timeline", label: "show_experience()", color: "text-yellow-400 hover:text-yellow-300" },
-                      { href: "#skills", label: "list_skills()", color: "text-purple-400 hover:text-purple-300" },
-                      { href: "#contact", label: "contact_me()", color: "text-green-400 hover:text-green-300" },
-                    ].map(({ href, label, color }) => (
-                      <a key={href} href={href} className={`group flex items-center gap-1 ${color} transition-colors`}>
-                        <span className="text-[#8b949e] group-hover:opacity-100 opacity-60">[</span>
-                        {label}
-                        <span className="text-[#8b949e] group-hover:opacity-100 opacity-60">]</span>
-                      </a>
-                    ))}
-                  </div>
-                  <p className="text-[#484f58] text-xs mt-3">^C to cancel · Tab to autocomplete</p>
-                </div>
-
-                <div className="mt-4 flex items-center gap-2">
-                  <span className="text-green-400 text-glow-green">aman@portfolio:~$</span>
-                  <span className="w-2 h-5 bg-[#c9d1d9] animate-pulse inline-block" />
-                </div>
-              </motion.div>
-            )}
+                {roles[roleIndex]}
+              </motion.p>
+            </AnimatePresence>
           </div>
-        </div>
+
+          <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+            Building scalable backends with{" "}
+            <span className="text-foreground font-medium">FastAPI & Python</span>, contributing to
+            open-source AI frameworks, and shipping tools that developers actually use.
+          </p>
+
+          {/* CTAs */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+            <Button size="lg" asChild>
+              <a href="#projects">View Projects</a>
+            </Button>
+            <Button size="lg" variant="outline" asChild>
+              <a href="#contact">Get in Touch</a>
+            </Button>
+          </div>
+
+          {/* Social links */}
+          <div className="flex items-center justify-center gap-8 pt-2">
+            {socialLinks.map(({ href, label }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >
+                {label}
+              </a>
+            ))}
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Scroll indicator */}
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2">
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          className="w-5 h-8 border-2 border-border rounded-full flex items-start justify-center pt-1.5"
+        >
+          <div className="w-1 h-2 bg-muted-foreground rounded-full" />
+        </motion.div>
       </div>
     </section>
   );

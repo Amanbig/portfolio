@@ -1,140 +1,136 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
+@custom-variant dark (&:is(.dark *));
+
+/* ─── Modern Minimal Dark Theme ─────────────────────────────── */
 :root {
-  /* Terminal Theme Colors */
-  --background: #0d1117;
-  /* GitHub Dark Dimmed / Terminal Black */
-  --foreground: #c9d1d9;
-  /* Terminal White/Gray */
+  /* zinc-950 bg, blue-500 accent */
+  --background: oklch(0.079 0 0);
+  --foreground: oklch(0.985 0 0);
 
-  --terminal-green: #00ff00;
-  --terminal-blue: #58a6ff;
-  --terminal-yellow: #f1e05a;
-  --terminal-red: #ff7b72;
-  --terminal-purple: #bc8cff;
-  --terminal-cyan: #39c5cf;
+  --card: oklch(0.130 0 0);
+  --card-foreground: oklch(0.985 0 0);
 
-  --font-mono: 'JetBrains Mono', 'Fira Code', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  --popover: oklch(0.130 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+
+  --primary: oklch(0.604 0.173 241.3);
+  --primary-foreground: oklch(0.985 0 0);
+
+  --secondary: oklch(0.213 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+
+  --muted: oklch(0.213 0 0);
+  --muted-foreground: oklch(0.640 0 0);
+
+  --accent: oklch(0.270 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+
+  --destructive: oklch(0.628 0.258 29.2);
+
+  --border: oklch(0.213 0 0);
+  --input: oklch(0.213 0 0);
+  --ring: oklch(0.604 0.173 241.3);
+
+  --radius: 0.5rem;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-mono: var(--font-mono);
-
-  --color-terminal-green: var(--terminal-green);
-  --color-terminal-blue: var(--terminal-blue);
-  --color-terminal-yellow: var(--terminal-yellow);
-  --color-terminal-red: var(--terminal-red);
-  --color-terminal-purple: var(--terminal-purple);
-  --color-terminal-cyan: var(--terminal-cyan);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains);
 }
 
 html {
   scroll-behavior: smooth;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-mono);
-  overflow-x: hidden;
+/* ─── Scrollbar ──────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; background: transparent; }
+::-webkit-scrollbar-thumb { background: oklch(0.27 0 0); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: oklch(0.604 0.173 241.3); }
+
+/* ─── Selection ──────────────────────────────────────────────── */
+::selection { background: oklch(0.604 0.173 241.3 / 30%); color: #fff; }
+
+/* ─── Grid background pattern ────────────────────────────────── */
+.bg-grid {
+  background-image:
+    linear-gradient(oklch(0.21 0 0 / 50%) 1px, transparent 1px),
+    linear-gradient(to right, oklch(0.21 0 0 / 50%) 1px, transparent 1px);
+  background-size: 40px 40px;
 }
 
-/* Custom scrollbar — thin, minimal */
-::-webkit-scrollbar {
-  width: 4px;
-  background: var(--background);
-}
-
-::-webkit-scrollbar-thumb {
-  background: #30363d;
-  border-radius: 2px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #58a6ff;
-}
-
-/* Selection styles */
-::selection {
-  background: rgba(88, 166, 255, 0.3);
-  color: #ffffff;
-}
-
-/* Terminal Utilities */
-.terminal-cursor::after {
-  content: '▋';
-  animation: blink 1s step-start infinite;
-  color: var(--terminal-green);
-  margin-left: 2px;
-}
-
-@keyframes blink {
-  50% {
-    opacity: 0;
-  }
-}
-
-/* Glow utilities */
-.glow-green {
-  box-shadow: 0 0 12px rgba(0, 255, 0, 0.15), 0 0 24px rgba(0, 255, 0, 0.05);
-}
-.glow-blue {
-  box-shadow: 0 0 12px rgba(88, 166, 255, 0.2), 0 0 24px rgba(88, 166, 255, 0.07);
-}
-.glow-purple {
-  box-shadow: 0 0 12px rgba(188, 140, 255, 0.2), 0 0 24px rgba(188, 140, 255, 0.07);
-}
-.text-glow-green {
-  text-shadow: 0 0 8px rgba(0, 255, 0, 0.5);
-}
-.text-glow-blue {
-  text-shadow: 0 0 8px rgba(88, 166, 255, 0.5);
-}
-
-/* Float animation for subtle elements */
+/* ─── Float animation ────────────────────────────────────────── */
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-4px); }
+  50%       { transform: translateY(-6px); }
 }
-.animate-float {
-  animation: float 3s ease-in-out infinite;
-}
+.animate-float { animation: float 3s ease-in-out infinite; }
 
-/* Count up animation helper */
+/* ─── Hero background orbs ───────────────────────────────────── */
+@keyframes orb1 {
+  0%, 100% { transform: translate(0,   0)   scale(1);    }
+  33%       { transform: translate(-40px, 30px) scale(1.08); }
+  66%       { transform: translate(30px, -20px) scale(0.95); }
+}
+@keyframes orb2 {
+  0%, 100% { transform: translate(0,   0)   scale(1);    }
+  40%       { transform: translate(50px, -40px) scale(1.1);  }
+  75%       { transform: translate(-30px, 20px) scale(0.92); }
+}
+@keyframes orb3 {
+  0%, 100% { transform: translate(0,   0)   scale(1);    }
+  50%       { transform: translate(20px, 50px) scale(1.12); }
+}
+.animate-orb-1 { animation: orb1 18s ease-in-out infinite; }
+.animate-orb-2 { animation: orb2 22s ease-in-out infinite; }
+.animate-orb-3 { animation: orb3 15s ease-in-out infinite; }
+
+/* ─── Fade-up ────────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0);     }
+}
+.animate-fade-up { animation: fadeUp 0.5s ease-out both; }
+
+/* ─── Count-up ───────────────────────────────────────────────── */
 @keyframes countUp {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0);    }
 }
-.animate-count-up {
-  animation: countUp 0.5s ease-out forwards;
-}
+.animate-count-up { animation: countUp 0.5s ease-out forwards; }
 
-/* Section separator style */
-.section-separator {
-  width: 100%;
-  height: 1px;
-  background: linear-gradient(to right,
-      rgba(88, 166, 255, 0) 0%,
-      rgba(88, 166, 255, 0.5) 50%,
-      rgba(88, 166, 255, 0) 100%);
-  margin: 4rem 0;
-}
-
-.scanline {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to bottom,
-      rgba(255, 255, 255, 0),
-      rgba(255, 255, 255, 0) 50%,
-      rgba(0, 0, 0, 0.1) 50%,
-      rgba(0, 0, 0, 0.1));
-  background-size: 100% 4px;
-  pointer-events: none;
-  z-index: 9999;
-  opacity: 0.08;
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    overflow-x: hidden;
+  }
 }
