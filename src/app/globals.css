@@ -4,9 +4,50 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* ─── Modern Minimal Dark Theme ─────────────────────────────── */
+/* ─── Light mode (default) ───────────────────────────────────── */
 :root {
-  /* zinc-950 bg, blue-500 accent */
+  --background: oklch(0.980 0 0);
+  --foreground: oklch(0.090 0 0);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.090 0 0);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.090 0 0);
+
+  --primary: oklch(0.550 0.18 241);
+  --primary-foreground: oklch(0.985 0 0);
+
+  --secondary: oklch(0.940 0 0);
+  --secondary-foreground: oklch(0.090 0 0);
+
+  --muted: oklch(0.940 0 0);
+  --muted-foreground: oklch(0.450 0 0);
+
+  --accent: oklch(0.920 0 0);
+  --accent-foreground: oklch(0.090 0 0);
+
+  --destructive: oklch(0.628 0.258 29.2);
+
+  --border: oklch(0.870 0 0);
+  --input: oklch(0.870 0 0);
+  --ring: oklch(0.550 0.18 241);
+
+  --radius: 0.5rem;
+
+  /* Grid line colour */
+  --grid-line: oklch(0.82 0 0 / 70%);
+
+  /* GitHub contribution heatmap — light palette */
+  --heatmap-0: #ebedf0;
+  --heatmap-1: #9be9a8;
+  --heatmap-2: #40c463;
+  --heatmap-3: #30a14e;
+  --heatmap-4: #216e39;
+}
+
+/* ─── Dark mode ──────────────────────────────────────────────── */
+.dark {
   --background: oklch(0.079 0 0);
   --foreground: oklch(0.985 0 0);
 
@@ -34,7 +75,15 @@
   --input: oklch(0.213 0 0);
   --ring: oklch(0.604 0.173 241.3);
 
-  --radius: 0.5rem;
+  /* Grid line colour */
+  --grid-line: oklch(0.21 0 0 / 55%);
+
+  /* GitHub contribution heatmap — dark palette */
+  --heatmap-0: #161b22;
+  --heatmap-1: #0e4429;
+  --heatmap-2: #006d32;
+  --heatmap-3: #26a641;
+  --heatmap-4: #39d353;
 }
 
 @theme inline {
@@ -65,72 +114,57 @@
   --font-mono: var(--font-jetbrains);
 }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 /* ─── Scrollbar ──────────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 4px; background: transparent; }
-::-webkit-scrollbar-thumb { background: oklch(0.27 0 0); border-radius: 2px; }
-::-webkit-scrollbar-thumb:hover { background: oklch(0.604 0.173 241.3); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--primary); }
 
 /* ─── Selection ──────────────────────────────────────────────── */
 ::selection { background: oklch(0.604 0.173 241.3 / 30%); color: #fff; }
 
-/* ─── Grid background pattern ────────────────────────────────── */
+/* ─── Grid background ────────────────────────────────────────── */
 .bg-grid {
   background-image:
-    linear-gradient(oklch(0.21 0 0 / 50%) 1px, transparent 1px),
-    linear-gradient(to right, oklch(0.21 0 0 / 50%) 1px, transparent 1px);
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px);
   background-size: 40px 40px;
 }
 
-/* ─── Float animation ────────────────────────────────────────── */
+/* ─── Orb animations ─────────────────────────────────────────── */
+@keyframes orb1 {
+  0%, 100% { transform: translate(0, 0)     scale(1);    }
+  33%       { transform: translate(-40px, 30px)  scale(1.08); }
+  66%       { transform: translate(30px, -20px)  scale(0.95); }
+}
+@keyframes orb2 {
+  0%, 100% { transform: translate(0, 0)     scale(1);    }
+  40%       { transform: translate(50px, -40px) scale(1.10); }
+  75%       { transform: translate(-30px, 20px) scale(0.92); }
+}
+@keyframes orb3 {
+  0%, 100% { transform: translate(0, 0)     scale(1);    }
+  50%       { transform: translate(20px, 50px)  scale(1.12); }
+}
+.animate-orb-1 { animation: orb1 18s ease-in-out infinite; }
+.animate-orb-2 { animation: orb2 22s ease-in-out infinite; }
+.animate-orb-3 { animation: orb3 15s ease-in-out infinite; }
+
+/* ─── Float ──────────────────────────────────────────────────── */
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50%       { transform: translateY(-6px); }
 }
 .animate-float { animation: float 3s ease-in-out infinite; }
 
-/* ─── Hero background orbs ───────────────────────────────────── */
-@keyframes orb1 {
-  0%, 100% { transform: translate(0,   0)   scale(1);    }
-  33%       { transform: translate(-40px, 30px) scale(1.08); }
-  66%       { transform: translate(30px, -20px) scale(0.95); }
-}
-@keyframes orb2 {
-  0%, 100% { transform: translate(0,   0)   scale(1);    }
-  40%       { transform: translate(50px, -40px) scale(1.1);  }
-  75%       { transform: translate(-30px, 20px) scale(0.92); }
-}
-@keyframes orb3 {
-  0%, 100% { transform: translate(0,   0)   scale(1);    }
-  50%       { transform: translate(20px, 50px) scale(1.12); }
-}
-.animate-orb-1 { animation: orb1 18s ease-in-out infinite; }
-.animate-orb-2 { animation: orb2 22s ease-in-out infinite; }
-.animate-orb-3 { animation: orb3 15s ease-in-out infinite; }
-
-/* ─── Fade-up ────────────────────────────────────────────────── */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0);     }
+  to   { opacity: 1; transform: translateY(0); }
 }
 .animate-fade-up { animation: fadeUp 0.5s ease-out both; }
 
-/* ─── Count-up ───────────────────────────────────────────────── */
-@keyframes countUp {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: translateY(0);    }
-}
-.animate-count-up { animation: countUp 0.5s ease-out forwards; }
-
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-    overflow-x: hidden;
-  }
+  * { @apply border-border outline-ring/50; }
+  body { @apply bg-background text-foreground; overflow-x: hidden; }
 }

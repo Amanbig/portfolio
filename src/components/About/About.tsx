@@ -1,6 +1,35 @@
 "use client";
-import { motion } from "motion/react";
+import { useRef, useEffect } from "react";
+import { motion, useInView } from "motion/react";
+import { gsap } from "gsap";
 import { Separator } from "@/components/ui/separator";
+
+function CountStat({ value, label }: { value: string; label: string }) {
+  const ref = useRef<HTMLParagraphElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-60px" });
+  const num = parseInt(value);
+  const suffix = value.replace(/\d+/, "");
+
+  useEffect(() => {
+    if (!isInView || !ref.current || isNaN(num)) return;
+    const obj = { val: 0 };
+    gsap.to(obj, {
+      val: num,
+      duration: 1.4,
+      ease: "power2.out",
+      onUpdate() {
+        if (ref.current) ref.current.textContent = Math.floor(obj.val) + suffix;
+      },
+    });
+  }, [isInView, num, suffix]);
+
+  return (
+    <div className="rounded-xl border border-border bg-card px-4 py-4 text-center hover:bg-accent/30 transition-colors">
+      <p ref={ref} className="text-2xl font-bold text-foreground">0{suffix}</p>
+      <p className="text-xs text-muted-foreground mt-1 leading-tight">{label}</p>
+    </div>
+  );
+}
 
 const highlights = [
   {
@@ -122,13 +151,7 @@ export default function About() {
           className="grid grid-cols-2 gap-3 content-start"
         >
           {stats.map(({ value, label }) => (
-            <div
-              key={label}
-              className="rounded-xl border border-border bg-card px-4 py-4 text-center hover:bg-accent/30 transition-colors"
-            >
-              <p className="text-2xl font-bold text-foreground">{value}</p>
-              <p className="text-xs text-muted-foreground mt-1 leading-tight">{label}</p>
-            </div>
+            <CountStat key={label} value={value} label={label} />
           ))}
         </motion.div>
       </div>

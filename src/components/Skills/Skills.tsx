@@ -95,8 +95,14 @@ const langColor: Record<string, string> = {
   Java: "#b07219", HTML: "#e34c26", CSS: "#563d7c", Shell: "#89e051",
 };
 
-/* ─── Contribution cell colours ──────────────────────────────── */
-const cellBg = ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"];
+/* ─── Contribution cell colours — pulled from CSS variables ──── */
+const cellBg = [
+  "var(--heatmap-0)",
+  "var(--heatmap-1)",
+  "var(--heatmap-2)",
+  "var(--heatmap-3)",
+  "var(--heatmap-4)",
+];
 
 interface Repo   { name: string; stars: number; forks: number; language: string | null }
 interface Contrib { date: string; count: number; level: 0|1|2|3|4 }

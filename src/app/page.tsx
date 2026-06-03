@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar/Navbar";
+import ScrollProgress from "@/components/ScrollProgress";
 import Hero from "@/components/Hero/Hero";
 import About from "@/components/About/About";
 import Skills from "@/components/Skills/Skills";
@@ -10,6 +11,7 @@ import Footer from "@/components/Footer/Footer";
 export default function Home() {
   return (
     <div className="relative w-full min-h-screen bg-background text-foreground overflow-hidden">
+      <ScrollProgress />
       <Navbar />
 
       <main className="flex flex-col">

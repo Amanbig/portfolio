@@ -1,7 +1,42 @@
 "use client";
-import { useState, useEffect } from "react";
-import { motion } from "motion/react";
+import { useRef, useState, useEffect } from "react";
+import { motion, useMotionValue, useTransform, useSpring } from "motion/react";
 import { Separator } from "@/components/ui/separator";
+
+function TiltCard({ children, accent }: { children: React.ReactNode; accent: { top: string; glow: string } }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const rotateX = useSpring(useTransform(y, [-0.5, 0.5], [6, -6]), { stiffness: 300, damping: 30 });
+  const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-6, 6]), { stiffness: 300, damping: 30 });
+
+  function onMouseMove(e: React.MouseEvent<HTMLDivElement>) {
+    const rect = ref.current!.getBoundingClientRect();
+    x.set((e.clientX - rect.left) / rect.width - 0.5);
+    y.set((e.clientY - rect.top) / rect.height - 0.5);
+  }
+  function onMouseLeave() { x.set(0); y.set(0); }
+
+  return (
+    <motion.div
+      ref={ref}
+      onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}
+      style={{ rotateX, rotateY, transformStyle: "preserve-3d", perspective: 800 }}
+      whileHover={{ scale: 1.02 }}
+      transition={{ scale: { duration: 0.2 } }}
+      className="group relative rounded-xl border border-border bg-card overflow-hidden flex flex-col cursor-default"
+      onMouseEnter={e => {
+        (e.currentTarget as HTMLDivElement).style.boxShadow = `0 12px 40px ${accent.glow}, 0 0 0 1px ${accent.top}30`;
+      }}
+      onMouseLeave={e => {
+        (e.currentTarget as HTMLDivElement).style.boxShadow = "";
+      }}
+    >
+      {children}
+    </motion.div>
+  );
+}
 
 interface Project {
   id: string;
@@ -256,18 +291,8 @@ export default function ProjectShowcase() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.05, duration: 0.4 }}
-              className="group relative rounded-xl border border-border bg-card overflow-hidden flex flex-col
-                transition-all duration-300 hover:-translate-y-1"
-              style={{
-                ["--glow" as string]: accent.glow,
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLDivElement).style.boxShadow = `0 8px 30px ${accent.glow}, 0 0 0 1px ${accent.top}30`;
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLDivElement).style.boxShadow = "";
-              }}
             >
+            <TiltCard accent={accent}>
               {/* Coloured top accent bar */}
               <div className="h-[3px] w-full flex-shrink-0" style={{ background: `linear-gradient(to right, ${accent.top}, ${accent.top}50)` }} />
 
@@ -371,6 +396,7 @@ export default function ProjectShowcase() {
                   )}
                 </div>
               </div>
+            </TiltCard>
             </motion.div>
           );
         })}

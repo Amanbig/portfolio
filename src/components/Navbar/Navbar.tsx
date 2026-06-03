@@ -1,7 +1,37 @@
 "use client";
 import { useState, useEffect } from "react";
 import { motion } from "motion/react";
+import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
+
+function ThemeToggle() {
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  if (!mounted) return <div className="w-8 h-8" />;
+
+  const isDark = theme === "dark";
+  return (
+    <button
+      onClick={() => setTheme(isDark ? "light" : "dark")}
+      aria-label="Toggle theme"
+      className="w-8 h-8 flex items-center justify-center rounded-md border border-border text-muted-foreground hover:text-foreground hover:bg-accent/60 transition-colors"
+    >
+      {isDark ? (
+        /* Sun icon */
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+          <circle cx="12" cy="12" r="4" />
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+        </svg>
+      ) : (
+        /* Moon icon */
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+        </svg>
+      )}
+    </button>
+  );
+}
 
 const links = [
   { href: "#about", label: "About" },
@@ -78,6 +108,7 @@ export default function Navbar() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <ThemeToggle />
           <Button size="sm" className="hidden md:inline-flex" asChild>
             <a href="/resume/Amanpreet_s_Resume.pdf" target="_blank" rel="noopener noreferrer">
               Resume

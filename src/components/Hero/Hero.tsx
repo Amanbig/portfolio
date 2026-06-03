@@ -6,6 +6,16 @@ import { Badge } from "@/components/ui/badge";
 
 const roles = ["Backend Engineer", "OSS Contributor", "API Developer", "Systems Builder"];
 
+/* Stagger variants */
+const container = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.11, delayChildren: 0.1 } },
+};
+const wordVariant = {
+  hidden: { opacity: 0, y: 28, filter: "blur(6px)" },
+  show:   { opacity: 1, y: 0,  filter: "blur(0px)", transition: { duration: 0.55, ease: [0.25, 0.46, 0.45, 0.94] } },
+};
+
 const topSkills = ["FastAPI", "Python", "Next.js", "Docker", "RAG"];
 
 const stats = [
@@ -48,20 +58,36 @@ export default function Hero() {
           <motion.div
             initial={{ opacity: 0, x: -28 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
             className="flex flex-col gap-6"
           >
             <div>
-              <Badge variant="secondary" className="text-xs tracking-wide px-3 py-1 mb-6">
-                Open to new opportunities
-              </Badge>
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+              >
+                <Badge variant="secondary" className="text-xs tracking-wide px-3 py-1 mb-6">
+                  Open to new opportunities
+                </Badge>
+              </motion.div>
 
-              <h1 className="text-6xl sm:text-7xl font-bold tracking-tight leading-[1.05]">
-                Hi, I&apos;m{" "}
-                <span className="bg-gradient-to-r from-primary via-blue-400 to-cyan-400 bg-clip-text text-transparent">
+              <motion.h1
+                variants={container}
+                initial="hidden"
+                animate="show"
+                className="text-6xl sm:text-7xl font-bold tracking-tight leading-[1.05] flex flex-wrap gap-x-4"
+              >
+                {["Hi,", "I'm"].map(w => (
+                  <motion.span key={w} variants={wordVariant}>{w}</motion.span>
+                ))}
+                <motion.span
+                  variants={wordVariant}
+                  className="bg-gradient-to-r from-primary via-blue-400 to-cyan-400 bg-clip-text text-transparent"
+                >
                   Amanpreet
-                </span>
-              </h1>
+                </motion.span>
+              </motion.h1>
             </div>
 
             {/* Animated role — clearly visible */}

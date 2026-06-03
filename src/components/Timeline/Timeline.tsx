@@ -1,6 +1,6 @@
 "use client";
-import { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { useRef, useState } from "react";
+import { motion, AnimatePresence, useScroll, useTransform } from "motion/react";
 
 const events = [
   {
@@ -79,6 +79,12 @@ const typeStyle = {
 
 export default function Timeline() {
   const [expanded, setExpanded] = useState<string | null>("1");
+  const listRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: listRef,
+    offset: ["start 0.85", "end 0.3"],
+  });
+  const lineScaleY = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   return (
     <section id="timeline" className="scroll-mt-20">
@@ -140,9 +146,19 @@ export default function Timeline() {
 
       {/* Timeline items */}
       <div className="relative">
-        <div className="absolute left-[11px] top-2 bottom-2 w-px bg-gradient-to-b from-primary/60 via-border to-border" />
+        {/* Track (faint background line) */}
+        <div className="absolute left-[11px] top-2 bottom-2 w-px bg-border/40" />
+        {/* Animated fill line */}
+        <motion.div
+          className="absolute left-[11px] top-2 w-px origin-top"
+          style={{
+            scaleY: lineScaleY,
+            height: "calc(100% - 1rem)",
+            background: "linear-gradient(to bottom, oklch(0.604 0.173 241.3), oklch(0.72 0.15 200 / 40%))",
+          }}
+        />
 
-        <div className="space-y-4">
+        <div ref={listRef} className="space-y-4">
           {events.map((event, i) => {
             const ts = typeStyle[event.type];
             const isOpen = expanded === event.id;
@@ -246,8 +262,8 @@ export default function Timeline() {
               </motion.div>
             );
           })}
-        </div>
-      </div>
+        </div>  {/* space-y-4 list */}
+      </div>  {/* relative wrapper */}
     </section>
   );
 }
