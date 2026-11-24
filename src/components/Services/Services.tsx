@@ -59,7 +59,7 @@ export default function Services() {
           {/* Search Bar */}
           <div className="p-4 border-b border-[#30363d] bg-[#0d1117]">
             <div className="bg-[#161b22] border border-[#30363d] px-3 py-1 flex items-center text-sm">
-              <span className="text-[#8b949e] mr-2">@category:"services"</span>
+              <span className="text-[#8b949e] mr-2">@category:&quot;services&quot;</span>
               <span className="w-0.5 h-4 bg-[#c9d1d9] animate-pulse" />
             </div>
           </div>

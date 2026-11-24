@@ -157,7 +157,7 @@ export default function Skills() {
                 {Object.entries(skillGroups).map(([group, skills], gi) => (
                   <div key={group}>
                     <div className="text-[#8b949e] text-xs mb-3 tracking-widest uppercase">
-                      <span className="text-[#e0af68]">// </span>{group}
+                      <span className="text-[#e0af68]">{"// "}</span>{group}
                     </div>
                     <div className="flex flex-wrap gap-2">
                       {skills.map((skill, si) => (

@@ -136,7 +136,7 @@ export default function Hero() {
 
                 {/* Navigation Commands */}
                 <div className="mt-10 pt-5 border-t border-[#30363d]">
-                  <p className="text-[#8b949e] mb-3 text-xs tracking-widest uppercase">// Quick Navigation</p>
+                  <p className="text-[#8b949e] mb-3 text-xs tracking-widest uppercase">{"// Quick Navigation"}</p>
                   <div className="flex flex-wrap gap-4 text-sm md:text-base">
                     {[
                       { href: "#projects", label: "view_projects()", color: "text-blue-400 hover:text-blue-300" },

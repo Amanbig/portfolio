@@ -26,7 +26,7 @@ export default function About() {
     },
     {
       title: "Developer Tooling",
-      desc: "Creator of RunAPI (PyPI) & backTool (npm) — frameworks used by real developers.",
+      desc: "Creator of DevOrch (AI CLI), RunAPI (PyPI), dockit & termlet (Snapcraft), and PhantomOps.",
       color: "text-yellow-400",
       border: "border-yellow-400/40",
       icon: "🛠️",
@@ -77,12 +77,15 @@ export default function About() {
                 </p>
                 <p className="mb-4 leading-relaxed text-[#8b949e]">
                   I&apos;ve built <span className="text-[#c9d1d9]">RAG pipelines</span> for government clients,
-                  published open-source frameworks like{" "}
+                  published open-source developer tooling and systems like{" "}
+                  <a href="https://github.com/Amanbig/PhantomOps" target="_blank" rel="noopener noreferrer"
+                    className="text-purple-400 hover:underline">PhantomOps</a>,{" "}
+                  <a href="https://github.com/Amanbig/dockit" target="_blank" rel="noopener noreferrer"
+                    className="text-purple-400 hover:underline">dockit</a>,{" "}
+                  <a href="https://github.com/Amanbig/DevOrch" target="_blank" rel="noopener noreferrer"
+                    className="text-purple-400 hover:underline">DevOrch</a>, and{" "}
                   <a href="https://github.com/Amanbig/runapi" target="_blank" rel="noopener noreferrer"
-                    className="text-purple-400 hover:underline">RunAPI</a>{" "}
-                  and{" "}
-                  <a href="https://github.com/Amanbig/MLCore" target="_blank" rel="noopener noreferrer"
-                    className="text-purple-400 hover:underline">MLCore</a>, and
+                    className="text-purple-400 hover:underline">RunAPI</a>, and
                   contributed merged PRs to <span className="text-[#c9d1d9]">deepset-ai/haystack</span>.
                 </p>
                 <p className="leading-relaxed text-[#8b949e]">
@@ -126,7 +129,7 @@ export default function About() {
 
                 {/* Quick stats */}
                 <div className="border border-[#30363d] rounded-lg bg-[#161b22] overflow-hidden">
-                  <div className="px-4 py-2 border-b border-[#30363d] text-[#8b949e] text-xs">// quick_stats.json</div>
+                  <div className="px-4 py-2 border-b border-[#30363d] text-[#8b949e] text-xs">{"// quick_stats.json"}</div>
                   <div className="p-4 space-y-2 text-xs">
                     {[
                       { key: "experience", val: "3+ years" },
