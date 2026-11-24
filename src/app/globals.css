@@ -1,73 +1,57 @@
 @import "tailwindcss";
 
 :root {
-  /* Terminal Theme Colors */
-  --background: #0d1117;
-  /* GitHub Dark Dimmed / Terminal Black */
-  --foreground: #c9d1d9;
-  /* Terminal White/Gray */
-
-  --terminal-green: #00ff00;
-  --terminal-blue: #58a6ff;
-  --terminal-yellow: #f1e05a;
-  --terminal-red: #ff7b72;
-  --terminal-purple: #bc8cff;
-  --terminal-cyan: #39c5cf;
-
-  --font-mono: 'JetBrains Mono', 'Fira Code', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  --background: #09090b;
+  --foreground: #e4e4e7;
+  --accent: #34d399;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-mono: var(--font-mono);
-
-  --color-terminal-green: var(--terminal-green);
-  --color-terminal-blue: var(--terminal-blue);
-  --color-terminal-yellow: var(--terminal-yellow);
-  --color-terminal-red: var(--terminal-red);
-  --color-terminal-purple: var(--terminal-purple);
-  --color-terminal-cyan: var(--terminal-cyan);
+  --color-accent: var(--accent);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
 }
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   overflow-x: hidden;
 }
 
-/* Custom scrollbar — thin, minimal */
 ::-webkit-scrollbar {
-  width: 4px;
+  width: 6px;
   background: var(--background);
 }
-
 ::-webkit-scrollbar-thumb {
-  background: #30363d;
-  border-radius: 2px;
+  background: #27272a;
+  border-radius: 3px;
 }
-
 ::-webkit-scrollbar-thumb:hover {
-  background: #58a6ff;
+  background: var(--accent);
 }
 
-/* Selection styles */
 ::selection {
-  background: rgba(88, 166, 255, 0.3);
-  color: #ffffff;
+  background: rgba(52, 211, 153, 0.3);
+  color: #fff;
 }
 
-/* Terminal Utilities */
-.terminal-cursor::after {
-  content: '▋';
-  animation: blink 1s step-start infinite;
-  color: var(--terminal-green);
-  margin-left: 2px;
+.cursor-blink::after {
+  content: "";
+  display: inline-block;
+  width: 0.5ch;
+  height: 1em;
+  margin-left: 4px;
+  vertical-align: -0.15em;
+  background: var(--accent);
+  animation: blink 1.1s step-start infinite;
 }
 
 @keyframes blink {
@@ -76,65 +60,19 @@ body {
   }
 }
 
-/* Glow utilities */
-.glow-green {
-  box-shadow: 0 0 12px rgba(0, 255, 0, 0.15), 0 0 24px rgba(0, 255, 0, 0.05);
-}
-.glow-blue {
-  box-shadow: 0 0 12px rgba(88, 166, 255, 0.2), 0 0 24px rgba(88, 166, 255, 0.07);
-}
-.glow-purple {
-  box-shadow: 0 0 12px rgba(188, 140, 255, 0.2), 0 0 24px rgba(188, 140, 255, 0.07);
-}
-.text-glow-green {
-  text-shadow: 0 0 8px rgba(0, 255, 0, 0.5);
-}
-.text-glow-blue {
-  text-shadow: 0 0 8px rgba(88, 166, 255, 0.5);
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at top, #000 30%, transparent 75%);
 }
 
-/* Float animation for subtle elements */
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-4px); }
-}
-.animate-float {
-  animation: float 3s ease-in-out infinite;
-}
-
-/* Count up animation helper */
-@keyframes countUp {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.animate-count-up {
-  animation: countUp 0.5s ease-out forwards;
-}
-
-/* Section separator style */
-.section-separator {
-  width: 100%;
-  height: 1px;
-  background: linear-gradient(to right,
-      rgba(88, 166, 255, 0) 0%,
-      rgba(88, 166, 255, 0.5) 50%,
-      rgba(88, 166, 255, 0) 100%);
-  margin: 4rem 0;
-}
-
-.scanline {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to bottom,
-      rgba(255, 255, 255, 0),
-      rgba(255, 255, 255, 0) 50%,
-      rgba(0, 0, 0, 0.1) 50%,
-      rgba(0, 0, 0, 0.1));
-  background-size: 100% 4px;
-  pointer-events: none;
-  z-index: 9999;
-  opacity: 0.08;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .cursor-blink::after {
+    animation: none;
+  }
 }
