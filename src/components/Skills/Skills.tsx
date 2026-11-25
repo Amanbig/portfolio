@@ -3,10 +3,10 @@ import { motion } from "motion/react";
 import SectionHeading from "@/components/SectionHeading";
 
 const skillGroups: Record<string, string[]> = {
-  Languages: ["Python", "JavaScript", "TypeScript", "Rust", "C/C++", "Java", "Dart"],
-  "Web & Backend": ["FastAPI", "Next.js", "NestJS", "Express.js", "React", "RunAPI", "Flask"],
-  "AI/ML & Data": ["TensorFlow", "PyTorch", "Scikit-learn", "RAG Systems", "Pandas", "NumPy", "XGBoost"],
-  "Mobile & Cloud": ["Flutter", "Docker", "AWS", "GCP", "PostgreSQL", "MongoDB", "Appwrite"],
+  Languages: ["Python", "Go", "TypeScript", "JavaScript", "Rust", "Dart", "C/C++", "SQL", "Bash", "HCL"],
+  "Backend & Frameworks": ["FastAPI", "RunAPI", "Node.js", "Express.js", "NestJS", "SQLAlchemy", "Next.js", "React", "Tauri", "Flutter"],
+  "DevOps, Cloud & Infra": ["Docker", "Podman", "Kubernetes", "Nomad", "Prometheus", "Grafana", "Loki", "AWS", "GCP", "CI/CD", "Linux / SSH"],
+  "AI, Agents & Data": ["RAG Systems", "AI Agents", "Haystack", "Multi-LLM Orchestration", "PyTorch", "TensorFlow", "VLMs", "PostgreSQL", "MongoDB", "Supabase"],
 };
 
 export default function Skills() {

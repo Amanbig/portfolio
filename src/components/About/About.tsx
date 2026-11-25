@@ -4,30 +4,30 @@ import SectionHeading from "@/components/SectionHeading";
 
 const highlights = [
   {
-    title: "Backend Engineer",
-    desc: "FastAPI, RAG pipelines and Dockerized ML platforms built for production.",
+    title: "Backend & Systems",
+    desc: "FastAPI, Go microservices, RAG pipelines, and observability tooling built for production.",
   },
   {
     title: "Open Source Contributor",
     desc: "Merged PRs in deepset-ai/haystack and haystack-core-integrations.",
   },
   {
-    title: "Full-Stack Capable",
-    desc: "End-to-end delivery with Next.js, Flutter and NestJS on top of solid backends.",
+    title: "DevOps & Infrastructure",
+    desc: "Container orchestration (Docker, Podman, Kubernetes), Grafana/Prometheus monitoring & secrets management.",
   },
   {
     title: "Developer Tooling",
-    desc: "Creator of DevOrch, RunAPI, dockit, termlet and PhantomOps.",
+    desc: "Creator of PhantomOps, dockit, termlet, ManUp, DevOrch, and RunAPI.",
   },
 ];
 
 const interests = [
   "Backend engineering & system design",
-  "AI/ML & RAG systems",
+  "DevOps, containers & observability",
+  "AI/ML, RAG & agentic systems",
   "Developer tooling & CLIs",
-  "Flutter mobile apps",
+  "Flutter & cross-platform apps",
   "Open source",
-  "Game development",
 ];
 
 export default function About() {
@@ -44,13 +44,15 @@ export default function About() {
             className="lg:col-span-3 space-y-5 text-zinc-400 leading-relaxed text-lg"
           >
             <p>
-              I&apos;m <span className="text-white font-medium">Amanpreet Singh</span>, a backend engineer with over
-              three years of experience in scalable systems and applied AI, based in Chandigarh, India.
+              I&apos;m <span className="text-white font-medium">Amanpreet Singh</span>, a backend &amp; systems engineer with over
+              three years of experience building scalable APIs, DevOps tooling, and applied AI, based in Chandigarh, India.
             </p>
             <p>
               I&apos;ve built RAG pipelines for government clients, and published open-source tools such as{" "}
               <a href="https://github.com/Amanbig/PhantomOps" target="_blank" rel="noopener noreferrer" className="text-zinc-200 hover:text-accent">PhantomOps</a>,{" "}
               <a href="https://github.com/Amanbig/dockit" target="_blank" rel="noopener noreferrer" className="text-zinc-200 hover:text-accent">dockit</a>,{" "}
+              <a href="https://github.com/Amanbig/termlet" target="_blank" rel="noopener noreferrer" className="text-zinc-200 hover:text-accent">termlet</a>,{" "}
+              <a href="https://github.com/Amanbig/ManUp" target="_blank" rel="noopener noreferrer" className="text-zinc-200 hover:text-accent">ManUp</a>,{" "}
               <a href="https://github.com/Amanbig/DevOrch" target="_blank" rel="noopener noreferrer" className="text-zinc-200 hover:text-accent">DevOrch</a> and{" "}
               <a href="https://github.com/Amanbig/runapi" target="_blank" rel="noopener noreferrer" className="text-zinc-200 hover:text-accent">RunAPI</a>.
             </p>
