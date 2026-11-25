@@ -38,8 +38,8 @@ export default function Hero() {
           </h1>
 
           <p className="mt-8 max-w-2xl text-lg text-zinc-400 leading-relaxed">
-            Backend engineer specializing in FastAPI, RAG pipelines and Dockerized ML platforms. I also ship
-            open-source developer tools and contribute to{" "}
+            Backend &amp; systems engineer specializing in Python, Go, Kubernetes observability, and applied AI. I build
+            scalable APIs, developer tooling, and contribute to{" "}
             <a
               href="https://github.com/deepset-ai/haystack"
               target="_blank"
